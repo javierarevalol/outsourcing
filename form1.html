@@ -46,7 +46,16 @@
       <label>Ciudad: <input type="text" name="ciudad"></label><br>
       <label>Actividad a Realizar:
         <select name="act_1">
-          <option value="Revisión e Instalación de Equipos de Medida Indirecta">Revisión e Instalación de Equipos de Medida Indirecta</option>
+          <option value="Revisión e Instalación de Equipos de Medida Directa">Revisión e Instalación de Equipos de Medida Directa</option>
+          <option value="Verificación de Amarres">Verificación de Amarres</option>
+          <option value="Primera Lectura">Primera Lectura</option>
+          <option value="Segunda Lectura">Segunda Lectura</option>
+          <option value="Lectura de Macromedidas">Lectura de Macromedidas</option>
+          <option value="Revisión de Fronteras">Revisión de Fronteras</option>
+          <option value="Censo Alumbrado Navideño">Censo Alumbrado Navideño</option>
+          <option value="Alumbrado Público">Alumbrado Público</option>
+          <option value="Normalización">Normalización</option>
+          <option value="Instalación de Macromedidas">Instalación de Macromedidas</option>
         </select>
       </label><br>
       <label>Número de Evento u Orden de Trabajo: <input type="text" name="numero_evento"></label><br>
@@ -227,7 +236,7 @@
         <div class="firma-entry">
           <label>Nombres: <input type="text" name="nombres[]" disabled></label><br>
           <label>Firma: <input type="text" name="firma[]" disabled></label><br>
-          <a href="login.php">Firmar</a>
+          <a href="login.html">Firmar</a>
           <button type="button" onclick="eliminarFirma(this)">Quitar</button>
           <hr>
         </div>
@@ -243,7 +252,16 @@
       <p>Esta sección debe ser diligenciado en el sitio trabajo y firmado por el personal autorizado para esta labor.</p><br>
       <label>Actividad a Realizar:
         <select name="act_1">
-          <option value="Revisión e Instalación de Equipos de Medida Indirecta">Revisión e Instalación de Equipos de Medida Indirecta</option>
+          <option value="Revisión e Instalación de Equipos de Medida Directa">Revisión e Instalación de Equipos de Medida Directa</option>
+          <option value="Verificación de Amarres">Verificación de Amarres</option>
+          <option value="Primera Lectura">Primera Lectura</option>
+          <option value="Segunda Lectura">Segunda Lectura</option>
+          <option value="Lectura de Macromedidas">Lectura de Macromedidas</option>
+          <option value="Revisión de Fronteras">Revisión de Fronteras</option>
+          <option value="Censo Alumbrado Navideño">Censo Alumbrado Navideño</option>
+          <option value="Alumbrado Público">Alumbrado Público</option>
+          <option value="Normalización">Normalización</option>
+          <option value="Instalación de Macromedidas">Instalación de Macromedidas</option>
         </select>
       </label><br>
       <label>Hora: <input type="time" name="hora2"></label><br>
@@ -309,8 +327,18 @@
                 <option value="Desplazamiento Peatonal. Verificación Visual">4. Desplazamiento Peatonal. Verificación Visual</option>
                 <option value="Inspección Visual de Área de Trabajo en Cuadrilla. Presentación al Usuario y Señalización Área de Trabajo">5. Inspección Visual de Área de Trabajo en Cuadrilla. Presentación al Usuario y Señalización Área de Trabajo</option>
                 <option value="Revisión a Grupo de Medida. Verificación de Tensión y Retiro de Sellos">6. Revisión a Grupo de Medida. Verificación de Tensión y Retiro de Sellos</option>
-                <option value="Instalación de Equipo Patrón y Pruebas de Medidor y TCs">7. Instalación de Equipo Patrón y Pruebas de Medidor y TCs</option>
-                <option value="Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina">8. Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina</option>
+                <option value="Desconexión y Aislamiento de Parciales de Carga del Usuario">7. Desconexión y Aislamiento de Parciales de Carga del Usuario</option>
+                <option value="Conexión Carga Resistiva. Pruebas a Medidor y Toma de Datos">8. Conexión Carga Resistiva. Pruebas a Medidor y Toma de Datos</option>
+                <option value="Retiro de Carga Resistiva. Desconexión de Medidor y Aislamieno Puntas">8.1. Retiro de Carga Resistiva. Desconexión de Medidor y Aislamieno Puntas</option>
+                <option value="Montaje y Conexionado de Nuevo Medidor. Pruebas de Funcionamiento">8.2. Montaje y Conexionado de Nuevo Medidor. Pruebas de Funcionamiento</option>
+                <option value="Conexión de Parciales de Carga. Restablecimiento de Servicio">9. Conexión de Parciales de Carga. Restablecimiento de Servicio</option>
+                <option value="Sellado de Medidor. Recolección de Residuos Sólidos">10. Sellado de Medidor. Recolección de Residuos Sólidos</option>
+                <option value="Ascenso a Estructura o Poste (Pretales)">11. Ascenso a Estructura o Poste (Pretales)</option>
+                <option value="Posicionamiento de Escalera en Estructura. Anclaje y Montaje de Línea de Vida">11.1. Posicionamiento de Escalera en Estructura. Anclaje y Montaje de Línea de Vida</option>
+                <option value="Ascenso a Estructura. Posicionamiento y Toma de Datos">11.2. Ascenso a Estructura. Posicionamiento y Toma de Datos</option>
+                <option value="Anclaje y Posicionamiento en Altura. Toma de Datos y Registro Fotográfico">12. Anclaje y Posicionamiento en Altura. Toma de Datos y Registro Fotográfico</option>
+                <option value="Descenso de Estructura o Poste">13. Descenso de Estructura o Poste</option>
+                <option value="Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina">14. Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina</option>
               </select><br><br>
               &nbsp; &nbsp; Otra Actividad: <input type="text" name="b_control[]">
           </label><br>
@@ -477,7 +505,7 @@
             <label>Cargo: <input type="text" name="cargo[]" disabled></label><br>
             <label>Nombres: <input type="text" name="nombres[]" disabled></label><br>
             <label>Firma: <input type="text" name="firma[]" disabled></label><br>
-            <a href="login.php">Firmar</a>
+            <a href="login.html">Firmar</a>
             <button type="button" onclick="eliminarFirma(this)">Quitar</button>
             <hr>
           </div>
