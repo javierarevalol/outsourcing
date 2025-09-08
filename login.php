@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acceso a Planillas</title>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
+    body{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background: url("WhatsApp Image 2025-07-28 at 09.20.39_f84f6a2b.jpg") no-repeat center center fixed;
+      background-size: cover;
+    }
+    .card{
+      width:100%;
+      max-width:400px;
+      background:rgba(255,255,255,0.92); /* semi-transparente para ver el fondo */
+      padding:2rem 2.5rem;
+      border-radius:12px;
+      box-shadow:0 6px 20px rgba(0,0,0,.3);
+      backdrop-filter: blur(6px); /* efecto de glassmorphism */
+    }
+    h1{
+      margin-bottom:1.5rem;
+      text-align:center;
+      color:#0066ff;
+    }
+    label{
+      display:block;
+      margin-bottom:.25rem;
+      font-weight:600;
+    }
+    input{
+      width:100%;
+      padding:.6rem .8rem;
+      margin-bottom:1.25rem;
+      border:1px solid #ccc;
+      border-radius:4px;
+    }
+    button{
+      width:100%;
+      padding:.8rem 0;
+      border:none;
+      border-radius:4px;
+      background:#0066ff;
+      color:#fff;
+      font-size:1rem;
+      cursor:pointer;
+      transition:background .2s ease-in-out;
+    }
+    button:hover{background:#004fcc;}
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Iniciar Sesión</h1>
+
+    <!-- Redirige a dashboard.php tras pulsar “Ingresar” -->
+    <form id="formLogin" action="" method="post">
+      <div class="form-group">
+        <label for="user">&nbsp; Usuario</label>
+        <input type="text" class="form-control" id="user" name="user">
+      </div>
+
+      <div class="form-group">
+        <label for="password">&nbsp; Contraseña</label>
+        <input type="password" class="form-control" id="password" name="contraseña">
+      </div>
+      
+      <div class="form-group">
+        <button type="submit">Ingresar</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Prevent form submission and redirect directly
+    document.getElementById("formLogin").addEventListener("submit", function(e) {
+      e.preventDefault(); // stop normal form behavior
+      window.location.href = "dashboard.php"; // redirect
+    });
+  </script>
+
+</body>
+</html>
