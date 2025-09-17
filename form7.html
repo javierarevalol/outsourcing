@@ -49,7 +49,7 @@
       <label>Ciudad: <input type="text" name="ciudad"></label><br>
       <label>Actividad a Realizar:
         <select name="act_1">
-          <option value="Actividades de Gestión Social">Actividades de Gestión Social</option>
+          <option value="Actividades de Supervisión">Actividades de Supervisión</option>
         </select>
       </label><br>
       <label>Número de Evento u Orden de Trabajo: <input type="text" name="numero_evento"></label><br>
@@ -246,7 +246,7 @@
       <p>Esta sección debe ser diligenciado en el sitio trabajo y firmado por el personal autorizado para esta labor.</p><br>
       <label>Actividad a Realizar:
         <select name="act_1">
-          <option value="Actividades de Gestión Social">Actividades de Gestión Social</option>
+          <option value="Actividades de Supervisión">Actividades de Supervisión</option>
         </select>
       </label><br>
       <label>Hora: <input type="time" name="hora2"></label><br>
@@ -306,10 +306,10 @@
           <label>Paso a Paso de la Actividad:
               <select name="act_2">
                 <option value="">NA</option>
-                <option value="Planeación de Actividad. Alistamiento de Herramienta y Vehículo">1. Planeación de Actividad. Alistamiento de Herramienta y Vehículo</option>
-                <option value="Desplazamiento en Vehículo. De Oficina a Sitio de Trabajo">2. Desplazamiento en Vehículo. De Oficina a Sitio de Trabajo</option>
+                <option value="Planeación de Actividad">1. Planeación de Actividad</option>
+                <option value="Desplazamiento en Motocicleta. De Oficina a Sitio de Trabajo">2. Desplazamiento en Motocicleta. De Oficina a Sitio de Trabajo</option>
                 <option value="Visitas de Gestión">3. Visitas de Gestión</option>
-                <option value="Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina">4. Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina</option>
+                <option value="Desplazamiento en Motocicleta. De Sitio de Trabajo a Oficina">4 . Desplazamiento en Motocicleta. De Sitio de Trabajo a Oficina</option>
               </select><br><br>
               &nbsp; &nbsp; Otra Actividad: <input type="text" name="b_control[]">
           </label><br>
@@ -417,6 +417,7 @@
                   <option value="Comunicacion_Asertiva">Comunicación Asertiva</option>
                   <option value="Distanciamiento_Animales">Distanciamiento (Perros, Abejas, Serpientes)</option>
                   <option value="Distanciamiento_Usuario_Agresivo">Distanciamiento (Usuario Agresivo)</option>
+                  <option value="Higiene_Postural">Higiene Postural</option>
                   <option value="Preoperacional_Vehiculo">Preoperacional de Vehículo</option>
                   <option value="Respeto_Senales_Transito">Respeto de Señales de Tránsito</option>
                   <option value="Respeto_Hacia_Usuario">Respeto Hacia el Usuario</option>
@@ -438,6 +439,7 @@
                   <option value="Comunicacion_Asertiva">Comunicación Asertiva</option>
                   <option value="Distanciamiento_Animales">Distanciamiento (Perros, Abejas, Serpientes)</option>
                   <option value="Distanciamiento_Usuario_Agresivo">Distanciamiento (Usuario Agresivo)</option>
+                  <option value="Higiene_Postural">Higiene Postural</option>
                   <option value="Preoperacional_Vehiculo">Preoperacional de Vehículo</option>
                   <option value="Respeto_Senales_Transito">Respeto de Señales de Tránsito</option>
                   <option value="Respeto_Hacia_Usuario">Respeto Hacia el Usuario</option>
@@ -459,6 +461,7 @@
                   <option value="Comunicacion_Asertiva">Comunicación Asertiva</option>
                   <option value="Distanciamiento_Animales">Distanciamiento (Perros, Abejas, Serpientes)</option>
                   <option value="Distanciamiento_Usuario_Agresivo">Distanciamiento (Usuario Agresivo)</option>
+                  <option value="Higiene_Postural">Higiene Postural</option>
                   <option value="Preoperacional_Vehiculo">Preoperacional de Vehículo</option>
                   <option value="Respeto_Senales_Transito">Respeto de Señales de Tránsito</option>
                   <option value="Respeto_Hacia_Usuario">Respeto Hacia el Usuario</option>
@@ -480,7 +483,7 @@
               </label><br><br>
               <label>Barreras de Soporte:<br><br>
                 <div class="row">
-                <select name="capacitacion">
+                <select name="soporte1">
                   <option value="">NA</option>
                   <option value="Capacitacion_Autocuidado">Capacitación en Autocuidado</option>
                   <option value="Capacitacion_Brigadas_Emergencia">Capacitación en Brigadas de Emergencia</option>
@@ -498,7 +501,7 @@
                   <option value="Capacitacion_Riesgo_Publico">Capacitación en Riesgo Público</option>
                   <option value="Capacitacion_Seguridad_Vial">Capacitación en Seguridad Vial</option>
                 </select><br><br>
-                <select name="capacitacion">
+                <select name="soporte2">
                   <option value="">NA</option>
                   <option value="Capacitacion_Autocuidado">Capacitación en Autocuidado</option>
                   <option value="Capacitacion_Brigadas_Emergencia">Capacitación en Brigadas de Emergencia</option>
@@ -516,7 +519,7 @@
                   <option value="Capacitacion_Riesgo_Publico">Capacitación en Riesgo Público</option>
                   <option value="Capacitacion_Seguridad_Vial">Capacitación en Seguridad Vial</option>
                 </select><br><br>
-                <select name="capacitacion">
+                <select name="soporte3">
                   <option value="">NA</option>
                   <option value="Capacitacion_Autocuidado">Capacitación en Autocuidado</option>
                   <option value="Capacitacion_Brigadas_Emergencia">Capacitación en Brigadas de Emergencia</option>
