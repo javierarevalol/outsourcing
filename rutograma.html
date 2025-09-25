@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Rutograma</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <h1>Rutograma</h1>
+
+  <!-- State toggle (no effect on control flow; just logged) -->
+  <div id="stateToggle">
+    <label><input type="radio" name="stateToggle" value="pavimentado" checked> Pavimentado </label>
+    <label><input type="radio" name="stateToggle" value="sin pavimentar"> Sin Pavimentar </label>
+  </div><br>
+
+  <div>
+    <button id="btnMain">Ruta Principal</button>
+    <button id="btnSecondary">Ruta Secundaria</button>
+    <button id="btnMark" disabled>Condición de Riesgo</button>
+    <button id="btnFinish" disabled>Destino</button>
+  </div>
+
+  <div id="tables"></div><br>
+
+  <script>
+    (function () {
+      const btnMain = document.getElementById('btnMain');
+      const btnSecondary = document.getElementById('btnSecondary');
+      const btnMark = document.getElementById('btnMark');
+      const btnFinish = document.getElementById('btnFinish');
+      const tablesWrap = document.getElementById('tables');
+
+      let intervalId = null;
+      let counter = 0;   // iteration index -> used to build nullX
+      let tbody = null;  // tbody of the active table (if any)
+      let running = false;
+
+      function setButtons({ main, secondary, mark, finish }) {
+        btnMain.disabled = !main;
+        btnSecondary.disabled = !secondary;
+        btnMark.disabled = !mark;
+        btnFinish.disabled = !finish;
+      }
+
+      function now() {
+        return new Date().toLocaleString();
+      }
+
+      // Read current state from the radio group
+      function currentState() {
+        const el = document.querySelector('input[name="stateToggle"]:checked');
+        return el ? el.value : '';
+      }
+
+      function createTable(runLabel) {
+        const runDiv = document.createElement('div');
+
+        const title = document.createElement('div');
+        title.textContent = runLabel;
+        runDiv.appendChild(title);
+
+        const table = document.createElement('table');
+        const thead = document.createElement('thead');
+        const trHead = document.createElement('tr');
+        ['Ruta', 'Ubicación', 'Hora', 'Pavimentado'].forEach(h => {
+          const th = document.createElement('th');
+          th.textContent = h;
+          trHead.appendChild(th);
+        });
+        thead.appendChild(trHead);
+        table.appendChild(thead);
+
+        const tb = document.createElement('tbody');
+        table.appendChild(tb);
+
+        runDiv.appendChild(table);
+        tablesWrap.prepend(runDiv); // newest table on top
+        return tb;
+      }
+
+      function addRow(buttonText, valueText, timeText) {
+        const tr = document.createElement('tr');
+
+        const tdBtn = document.createElement('td');
+        tdBtn.textContent = buttonText || '';
+
+        const tdVal = document.createElement('td');
+        tdVal.textContent = valueText;
+
+        const tdTime = document.createElement('td');
+        tdTime.textContent = timeText || now();
+
+        const tdState = document.createElement('td');
+        tdState.textContent = currentState();
+
+        tr.appendChild(tdBtn);
+        tr.appendChild(tdVal);
+        tr.appendChild(tdTime);
+        tr.appendChild(tdState);
+        tbody.appendChild(tr);
+      }
+
+      function startAutoInterval() {
+        intervalId = setInterval(() => {
+          counter += 1;
+          addRow('', `ubicacion${counter}`, now());
+        }, 5_000);
+      }
+
+      function restartAutoInterval() {
+        if (intervalId) clearInterval(intervalId);
+        startAutoInterval();
+      }
+
+      function startRun(startButtonName) {
+        if (running) return;
+        running = true;
+
+        setButtons({ main: false, secondary: false, mark: true, finish: true });
+
+        const label = `Ruta "${startButtonName}" — ${now()}`;
+        tbody = createTable(label);
+
+        // First record
+        counter = 1;
+        addRow(startButtonName, `ubicacion${counter}`, now());
+
+        // Begin 5s auto-appends
+        startAutoInterval();
+      }
+
+      function markRun() {
+        if (!running) return;
+        // Append an immediate nullX row labeled as a mark, then restart the 5s timer
+        counter += 1;
+        addRow('riesgo', `ubicacion${counter}`, now());
+        restartAutoInterval();
+      }
+
+      function finishRun() {
+        if (!running) return;
+
+        // On finish, advance to the next nullX and record it
+        counter += 1;
+        addRow('destino', `ubicacion${counter}`, now());
+
+        // Tear down
+        if (intervalId) clearInterval(intervalId);
+        intervalId = null;
+        tbody = null;
+        running = false;
+
+        // Reset buttons
+        setButtons({ main: true, secondary: true, mark: false, finish: false });
+      }
+
+      // Wire up buttons
+      btnMain.addEventListener('click', () => startRun('ruta-principal'));
+      btnSecondary.addEventListener('click', () => startRun('ruta-secundaria'));
+      btnMark.addEventListener('click', markRun);
+      btnFinish.addEventListener('click', finishRun);
+
+      // Initial state
+      setButtons({ main: true, secondary: true, mark: false, finish: false });
+    })();
+  </script>
+</body>
+</html>
