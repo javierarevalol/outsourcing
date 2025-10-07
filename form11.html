@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HSE-F11-5 · Auto Chequeo de Vehículos</title>
+  <style>
+    :root{
+      --ink:#111;
+      --muted:#555;
+      --line:#ddd;
+      --accent:#0a7;
+      --bg:#fff;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:14px/1.35 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Nimbus Sans", sans-serif}
+    .container{max-width:1100px;margin:24px auto;padding:0 16px}
+    header{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;margin-bottom:12px}
+    h1{font-size:20px;margin:0 0 4px 0}
+    .badge{display:inline-block;background:#eef;border:1px solid var(--line);padding:2px 8px;border-radius:999px;font-size:12px}
+    .meta{font-size:12px;color:var(--muted)}
+    .grid{display:grid;gap:10px}
+    .grid.cols-2{grid-template-columns:1fr 1fr}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+    fieldset{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0}
+    legend{padding:0 6px;font-weight:700}
+    label{font-size:13px;color:var(--muted)}
+    input[type="text"],input[type="date"],input[type="number"],select,textarea{
+      width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;outline:none;
+    }
+    textarea{min-height:96px;resize:vertical}
+    .row{display:grid;grid-template-columns:180px 1fr;gap:8px;align-items:center}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px}
+    table{border-collapse:collapse;width:100%;min-width:980px}
+    th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:middle}
+    thead th{position:sticky;top:0;background:#f8f8f8;z-index:1}
+    .qty{width:90px}
+    .days{white-space:nowrap}
+    .days select{width:92px}
+    .small{font-size:12px;color:var(--muted)}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .section-title{font-weight:700;margin:18px 0 6px}
+    .signs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .sign{border-top:1px solid var(--ink);padding-top:6px;text-align:center;height:56px;display:flex;align-items:end;justify-content:center}
+    .week-signs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:8px}
+    .wcol{border-top:1px dashed var(--line);padding-top:24px;text-align:center;height:64px}
+    .footer{font-size:12px;color:var(--muted);margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
+    @media print{
+      body{background:#fff}
+      .container{max-width:100%;margin:0;padding:0 12mm}
+      header{margin-top:6mm}
+      .table-wrap{border-color:#bbb}
+      a[href^="http"]::after{content:""}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>AUTO CHEQUEO DE VEHÍCULOS <span class="badge">HSE‑F11‑5</span></h1>
+        <div class="meta">Fecha de aprobación: 21/08/2018 · Fecha de actualización: 06/07/2020</div>
+      </div>
+      <div class="meta">
+        <div><strong>Fecha:</strong> <input type="date" /></div>
+      </div>
+    </header>
+
+    <fieldset>
+      <legend>Datos del vehículo y del conductor</legend>
+      <div class="grid cols-3">
+        <div><label>ZONA</label><input type="text" /></div>
+        <div><label>PLACA</label><input type="text" /></div>
+        <div><label>MARCA</label><input type="text" /></div>
+        <div><label>MODELO</label><input type="text" /></div>
+        <div><label>TIPO</label><input type="text" /></div>
+        <div><label>COLOR</label><input type="text" /></div>
+        <div><label>PROPIETARIO</label><input type="text" /></div>
+        <div><label>TELÉFONO</label><input type="text" /></div>
+        <div><label>NOMBRE DEL CONDUCTOR</label><input type="text" /></div>
+        <div><label>CÉDULA</label><input type="text" /></div>
+        <div><label>KILOMETRAJE</label><input type="number" min="0" step="1" /></div>
+      </div>
+      <div class="grid cols-2" style="margin-top:8px">
+        <div><label>Kilometraje inicial</label><input type="number" min="0" step="1" /></div>
+        <div><label>Kilometraje final</label><input type="number" min="0" step="1" /></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Documentación</legend>
+      <div class="grid cols-3">
+        <div><label>Tarjeta de propiedad Nº</label><input type="text" /></div>
+        <div><label>Tipo de servicio</label><input type="text" /></div>
+        <div><label>Licencia de conducción Nº</label><input type="text" /></div>
+        <div><label>Categoría</label><input type="text" /></div>
+        <div><label>Tarjeta de operación</label>
+          <div class="grid cols-2">
+            <select><option>SI</option><option>NO</option></select>
+            <input type="text" placeholder="Nº" />
+          </div>
+          <label class="small">Vence</label><input type="date" />
+        </div>
+        <div><label>SOAT</label>
+          <div class="grid cols-2">
+            <select><option>SI</option><option>NO</option></select>
+            <input type="text" placeholder="Nº" />
+          </div>
+          <label class="small">Vence</label><input type="date" />
+        </div>
+        <div><label>Certificado de gases</label>
+          <div class="grid cols-2">
+            <select><option>SI</option><option>NO</option></select>
+            <input type="text" placeholder="Nº" />
+          </div>
+          <label class="small">Vence</label><input type="date" />
+        </div>
+        <div><label>Extracto de contrato</label>
+          <div class="grid cols-2">
+            <select><option>SI</option><option>NO</option></select>
+            <input type="text" placeholder="Nº" />
+          </div>
+          <label class="small">Vence</label><input type="date" />
+        </div>
+        <div><label>Seguro RC Contractual</label>
+          <div class="grid cols-2">
+            <select><option>SI</option><option>NO</option></select>
+            <input type="text" placeholder="Nº" />
+          </div>
+          <label class="small">Vence</label><input type="date" />
+        </div>
+        <div><label>Seguro RC Extracontractual</label>
+          <div class="grid cols-2">
+            <select><option>SI</option><option>NO</option></select>
+            <input type="text" placeholder="Nº" />
+          </div>
+          <label class="small">Vence</label><input type="date" />
+        </div>
+        <div><label>Seguro contra todo riesgo</label>
+          <div class="grid cols-2">
+            <select><option>SI</option><option>NO</option></select>
+            <input type="text" placeholder="Nº" />
+          </div>
+          <label class="small">Vence</label><input type="date" />
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Mantenimientos</legend>
+      <div class="grid cols-3">
+        <div><label>Cambio de aceite (fecha)</label><input type="date" /></div>
+        <div><label>Sincronización (fecha)</label><input type="date" /></div>
+        <div><label>Alineación / Balanceo (fecha)</label><input type="date" /></div>
+        <div><label>Cambio filtro de combustible (fecha)</label><input type="date" /></div>
+        <div><label>Revisión de frenos (fecha)</label><input type="date" /></div>
+        <div><label>Revisión sistema eléctrico (fecha)</label><input type="date" /></div>
+        <div><label>Último mantenimiento (fecha)</label><input type="date" /></div>
+      </div>
+    </fieldset>
+
+    <h3 class="section-title">Lista de verificación – Vehículo (BE/ME/NA por día)</h3>
+    <p class="small">BE: Buen estado · ME: Mal estado · NA: No aplica</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th class="qty">Cant. requerida</th>
+            <th class="qty">Cant. encontrada</th>
+            <th class="days">Lunes</th>
+            <th class="days">Martes</th>
+            <th class="days">Miércoles</th>
+            <th class="days">Jueves</th>
+            <th class="days">Viernes</th>
+            <th class="days">Sábado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Cabina / exteriores / iluminación -->
+          <tr><td>Espejo interno (retrovisor)</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Espejos laterales</td><td>2</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Limpiaparabrisas (plumillas)</td><td>2</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Parabrisas</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Luz techo</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Vidrios puertas (ventilador)</td><td>4</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Parasoles</td><td>2</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Apoya cabezas</td><td>4</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Cinturones de seguridad</td><td>5</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Luces direccionales delanteras</td><td>2</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Luces direccionales traseras</td><td>2</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Luces de parqueo</td><td>4</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Luz de freno</td><td>2</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Luces delanteras altas</td><td>2</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Luces delanteras bajas</td><td>2</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Luces traseras</td><td>2</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Luces de reversa</td><td>2</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Pastas luces</td><td>4</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Llantas</td><td>4</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Llanta de repuesto</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Pito</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Alarma de reversa</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="section-title">Estado general y accesorios</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th class="qty">Cant. requerida</th>
+            <th class="qty">Cant. encontrada</th>
+            <th class="days">Lunes</th>
+            <th class="days">Martes</th>
+            <th class="days">Miércoles</th>
+            <th class="days">Jueves</th>
+            <th class="days">Viernes</th>
+            <th class="days">Sábado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Estado general de latonería y pintura</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Estado general del motor / fugas</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Revisión de fluidos</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Engranajes / caja de velocidad</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Embrague</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Estado general de suspensión</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Sistema eléctrico</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Sistema de frenos</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Sistema 4x4</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Sistema de dirección</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Estado general de cojinería</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Tablero de control</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Aseo general</td><td>–</td><td><input type="text" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <!-- Accesorios específicos -->
+          <tr><td>Capacete</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Porta escalera</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Porta pértiga</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Caja para herramienta de 46"</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Caja transporte 9 medidores</td><td>1</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+          <tr><td>Logos</td><td>4</td><td><input type="number" min="0" class="qty"/></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td><td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="section-title">Equipo de seguridad</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th class="qty">Cant. requerida</th>
+            <th class="qty">Cant. encontrada</th>
+            <th class="days">Lunes</th>
+            <th class="days">Martes</th>
+            <th class="days">Miércoles</th>
+            <th class="days">Jueves</th>
+            <th class="days">Viernes</th>
+            <th class="days">Sábado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Extintor</td><td>1</td><td><input type="number" min="0" class="qty" /></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+          </tr>
+          <tr><td>Juego de herramientas (alicate, destornilladores, llave de expansión y llaves fijas)</td><td>1</td><td><input type="number" min="0" class="qty" /></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+          </tr>
+          <tr><td>Cruceta</td><td>1</td><td><input type="number" min="0" class="qty" /></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+          </tr>
+          <tr><td>Gato</td><td>1</td><td><input type="number" min="0" class="qty" /></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+          </tr>
+          <tr><td>Tacos</td><td>2</td><td><input type="number" min="0" class="qty" /></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+          </tr>
+          <tr><td>Señales triangulares</td><td>2</td><td><input type="number" min="0" class="qty" /></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+          </tr>
+          <tr><td>Conos</td><td>2</td><td><input type="number" min="0" class="qty" /></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+          </tr>
+          <tr><td>Chaleco reflectivo</td><td>1</td><td><input type="number" min="0" class="qty" /></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+          </tr>
+          <tr><td>Botiquín</td><td>1</td><td><input type="number" min="0" class="qty" /></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+            <td><select><option></option><option>BE</option><option>ME</option><option>NA</option></select></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <fieldset>
+      <legend>Observaciones</legend>
+      <textarea placeholder="Escriba aquí hallazgos, correctivos o comentarios..."></textarea>
+    </fieldset>
+
+    <div class="two-col">
+      <div>
+        <div class="signs">
+          <div><div class="sign">Firma Coordinador / Supervisor</div></div>
+          <div><div class="sign">Firma Conductor</div></div>
+        </div>
+      </div>
+      <div>
+        <label class="small">Firmas por día</label>
+        <div class="week-signs">
+          <div class="wcol">Lun</div>
+          <div class="wcol">Mar</div>
+          <div class="wcol">Mié</div>
+          <div class="wcol">Jue</div>
+          <div class="wcol">Vie</div>
+          <div class="wcol">Sáb</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Documento: HSE‑F11‑5</span>
+      <span>Uso: Auto chequeo de vehículos</span>
+      <span>Este HTML es una versión digital del formato impreso.</span>
+    </div>
+  </div>
+</body>
+</html>
