@@ -45,15 +45,40 @@
       <legend>1. CONDICIONES GENERALES</legend>
       <label>Fecha: <input type="date" name="fecha"></label><br>
       <label>Hora: <input type="time" name="hora"></label><br>
-      <label>Ciudad: <input type="text" name="ciudad"></label><br>
-      <label>Actividad a Realizar:
-        <select name="act_1" disabled>
-          <option value="Actividades de Supervisión">Actividades de Supervisión</option>
+      <label>Ciudad:
+        <select name="ciudad">
+          <option value="">NA</option>
+          <option value="CHIQUINQUIRA">CHIQUINQUIRÁ</option>
+          <option value="DUITAMA">DUITAMA</option>
+          <option value="GUATEQUE">GUATEQUE</option>
+          <option value="MIRAFLORES">MIRAFLORES</option>
+          <option value="MONIQUIRA">MONIQUIRÁ</option>
+          <option value="SOGAMOSO">SOGAMOSO</option>
+          <option value="PUERTO_BOYACA">PUERTO BOYACÁ</option>
+          <option value="TUNJA">TUNJA</option>
         </select>
       </label><br>
-      <label>Número de Evento u Orden de Trabajo: <input type="text" name="numero_evento"></label><br>
-      <label>Municipio Donde se Realiza: <input type="text" name="municipio"></label><br>
-      <label>Barrio/Vereda: <input type="text" name="barrio_vereda"></label>
+      <label>Actividad a Realizar:
+        <select name="act_1" disabled>
+          <option value="Suspensión y Reconexión del Servicio de Energía">Suspensión y Reconexión del Servicio de Energía</option>
+        </select>
+      </label><br>
+      <label>Número de Evento u Orden de Trabajo: <input type="text" name="numero_evento" value="Según Listado Semanal" disabled></label><br>
+      <label>Municipio Donde se Realiza:
+        <select name="soporte1">
+          <option value="">NA</option>
+          <option value="SUGAMUXI">SUGAMUXI</option>
+          <option value="TUNDAMA">TUNDAMA</option>
+          <option value="NORTE">NORTE</option>
+          <option value="CENTRO">CENTRO</option>
+          <option value="OCCIDENTE">OCCIDENTE</option>
+          <option value="ORIENTE">ORIENTE</option>
+          <option value="MIRAFLORES">MIRAFLORES</option>
+          <option value="RICAURTE">RICAURTE</option>
+          <option value="PUERTO_BOYACA">PUERTO BOYACÁ</option>
+        </select>
+      </label><br>
+      <label>Barrio/Vereda: <input type="text" name="barrio_vereda" value="Según Listado Semanal" disabled></label>
       <p>De acuerdo a la actividad a realizar, se debe cumplir con la información solicitada de lo contrario debe verificarse para poder continuar.</p>
       </fieldset><br>
       
@@ -103,7 +128,7 @@
           </select>
       </label><br>
       <label>Otro: 
-          <h2>Proyecto PERPE</h2>
+          <h2>Notificaciones</h2>
       </label>
       <p>El grupo de trabajo debe identificar el proceso al cual pertenece la actividad que se va a desarrollar. Tenga en cuenta que este análisis es para actividades consideradas como CRITICAS, o donde se involucren tareas como: Trabajo en alturas, exposición a energía eléctrica, transporte en vehículos o motocicletas, entre otros.</p>
       </fieldset><br>
@@ -247,7 +272,7 @@
       <p>Esta sección debe ser diligenciado en el sitio trabajo y firmado por el personal autorizado para esta labor.</p><br>
       <label>Actividad a Realizar:
         <select name="act_1" disabled>
-          <option value="Actividades de Supervisión">Actividades de Supervisión</option>
+          <option value="Suspensión y Reconexión del Servicio de Energía">Suspensión y Reconexión del Servicio de Energía</option>
         </select>
       </label><br>
       <label>Hora: <input type="time" name="hora2"></label><br>
@@ -307,10 +332,16 @@
           <label>Paso a Paso de la Actividad:
               <select name="act_2">
                 <option value="">NA</option>
-                <option value="Planeación de Actividad">1. Planeación de Actividad</option>
-                <option value="Desplazamiento en Motocicleta. De Oficina a Sitio de Trabajo">2. Desplazamiento en Motocicleta. De Oficina a Sitio de Trabajo</option>
-                <option value="Visitas de Gestión">3. Visitas de Gestión</option>
-                <option value="Desplazamiento en Motocicleta. De Sitio de Trabajo a Oficina">4 . Desplazamiento en Motocicleta. De Sitio de Trabajo a Oficina</option>
+                <option value="Planeacion_Actividad">1. Planeación de Actividad</option>
+                <option value="Alistamiento_Inspeccion_Vehiculo_Equipos_Herramientas">2. Alistamiento e Inspección de Vehículo, Equipos y Herramientas</option>
+                <option value="Desplazamiento_Vehiculo_Oficina_Sitio_Trabajo">3. Desplazamiento en Vehículo. De Oficina a Sitio de Trabajo</option>
+                <option value="Senalizacion_Demarcacion_Area_Trabajo">4. Señalización y Demarcación del Área de Trabajo</option>
+                <option value="Alistamiento_Amarre_Escalera">5. Alistamiento y Amarre de Escalera</option>
+                <option value="Ascenso_Poste_Escalera">6. Ascenso a Poste en Escalera</option>
+                <option value="Suspension_Reconexion_Servicio">7. Suspensión y/o Reconexión del Servicio</option>
+                <option value="Descenso_Poste_Escalera">8. Descenso de Poste en Escalera</option>
+                <option value="Orden_Aseo_Sitio_Trabajo">9. Orden y Aseo de Sitio de Trabajo</option>
+                <option value="Desplazamiento_Vehiculo_Sitio_Trabajo_Oficina">10. Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina</option>
               </select><br><br>
               &nbsp; &nbsp; Otra Actividad: <input type="text" name="b_control[]">
           </label><br>
@@ -321,29 +352,34 @@
                 <div class="row">
                   <select name="riesgo1">
                   <option value="">NA</option>
-                  <option value="Apatia_Desinteres">Apatía o Desinterés</option>
+                  <option value="Arco_Electrico">Arco Eléctrico</option>
                   <option value="Atropellamiento">Atropellamiento</option>
                   <option value="Caida_Mismo_Nivel">Caída al Mismo Nivel</option>
+                  <option value="Caida_Objetos">Caída de Objetos</option>
                   <option value="Choque">Choque</option>
                   <option value="Colision">Colisión</option>
+                  <option value="Contacto_Electrico">Contacto Eléctrico</option>
                   <option value="Derrumbe">Derrumbe</option>
+                  <option value="Electrocucion">Electrocución</option>
                   <option value="Emision_Gases">Emisión de Gases</option>
+                  <option value="Fatiga">Fatiga</option>
                   <option value="Golpe_Contusion">Golpe o Contusión</option>
                   <option value="Insolacion_Deshidratacion">Insolación o Deshidratación</option>
-                  <option value="Lesion_Columna">Lesión de Columna</option>
-                  <option value="Lesion_Articulacion">Lesión en Articulación</option>
-                  <option value="Lesion_Tendon_Ligamento">Lesión en Tendón o Ligamento</option>
-                  <option value="Lesion_Osteomuscular">Lesión Osteomuscular</option>
+                  <option value="Laceracion_Corte">Laceración o Corte</option>
+                  <option value="Machucon">Machucón</option>
+                  <option value="Mala_Postura">Mala Postura</option>
                   <option value="Molestias_Irritacion">Molestias o Irritación</option>
                   <option value="Mordedura_Canina">Mordedura Canina</option>
                   <option value="Mordedura_Serpiente">Mordedura de Serpiente</option>
                   <option value="Orden_Publico">Orden Público</option>
                   <option value="Picadura_Abeja">Picadura de Abeja</option>
                   <option value="Picadura_Insecto">Picadura de Insecto</option>
-                  <option value="Riesgo_Psicosocial">Riesgo Psicosocial</option>
+                  <option value="Quemadura_Riesgo_Electrico">Quemadura por Riesgo Eléctrico</option>
+                  <option value="Quemadura_Solar">Quemadura Solar</option>
+                  <option value="Raspon_Abracion">Raspón o Abrasión</option>
                   <option value="Robo_Atraco">Robo o Atraco</option>
+                  <option value="Trauma_Craneoencefalico">Trauma Craneoencefálico</option>
                   <option value="Tropezon">Tropezón</option>
-                  <option value="Usuario_Conflictivo">Usuario Conflictivo</option>
                   <option value="Volcamiento">Volcamiento</option>
                 </select><br><br>
                 <label>Nivel (A, M):  
@@ -354,29 +390,34 @@
                 </select><br><br>
                 <select name="riesgo2">
                   <option value="">NA</option>
-                  <option value="Apatia_Desinteres">Apatía o Desinterés</option>
+                  <option value="Arco_Electrico">Arco Eléctrico</option>
                   <option value="Atropellamiento">Atropellamiento</option>
                   <option value="Caida_Mismo_Nivel">Caída al Mismo Nivel</option>
+                  <option value="Caida_Objetos">Caída de Objetos</option>
                   <option value="Choque">Choque</option>
                   <option value="Colision">Colisión</option>
+                  <option value="Contacto_Electrico">Contacto Eléctrico</option>
                   <option value="Derrumbe">Derrumbe</option>
+                  <option value="Electrocucion">Electrocución</option>
                   <option value="Emision_Gases">Emisión de Gases</option>
+                  <option value="Fatiga">Fatiga</option>
                   <option value="Golpe_Contusion">Golpe o Contusión</option>
                   <option value="Insolacion_Deshidratacion">Insolación o Deshidratación</option>
-                  <option value="Lesion_Columna">Lesión de Columna</option>
-                  <option value="Lesion_Articulacion">Lesión en Articulación</option>
-                  <option value="Lesion_Tendon_Ligamento">Lesión en Tendón o Ligamento</option>
-                  <option value="Lesion_Osteomuscular">Lesión Osteomuscular</option>
+                  <option value="Laceracion_Corte">Laceración o Corte</option>
+                  <option value="Machucon">Machucón</option>
+                  <option value="Mala_Postura">Mala Postura</option>
                   <option value="Molestias_Irritacion">Molestias o Irritación</option>
                   <option value="Mordedura_Canina">Mordedura Canina</option>
                   <option value="Mordedura_Serpiente">Mordedura de Serpiente</option>
                   <option value="Orden_Publico">Orden Público</option>
                   <option value="Picadura_Abeja">Picadura de Abeja</option>
                   <option value="Picadura_Insecto">Picadura de Insecto</option>
-                  <option value="Riesgo_Psicosocial">Riesgo Psicosocial</option>
+                  <option value="Quemadura_Riesgo_Electrico">Quemadura por Riesgo Eléctrico</option>
+                  <option value="Quemadura_Solar">Quemadura Solar</option>
+                  <option value="Raspon_Abracion">Raspón o Abrasión</option>
                   <option value="Robo_Atraco">Robo o Atraco</option>
+                  <option value="Trauma_Craneoencefalico">Trauma Craneoencefálico</option>
                   <option value="Tropezon">Tropezón</option>
-                  <option value="Usuario_Conflictivo">Usuario Conflictivo</option>
                   <option value="Volcamiento">Volcamiento</option>
                 </select><br><br>
                 <label>Nivel (A, M):  
@@ -387,29 +428,34 @@
                 </select><br><br>
                 <select name="riesgo3">
                   <option value="">NA</option>
-                  <option value="Apatia_Desinteres">Apatía o Desinterés</option>
+                  <option value="Arco_Electrico">Arco Eléctrico</option>
                   <option value="Atropellamiento">Atropellamiento</option>
                   <option value="Caida_Mismo_Nivel">Caída al Mismo Nivel</option>
+                  <option value="Caida_Objetos">Caída de Objetos</option>
                   <option value="Choque">Choque</option>
                   <option value="Colision">Colisión</option>
+                  <option value="Contacto_Electrico">Contacto Eléctrico</option>
                   <option value="Derrumbe">Derrumbe</option>
+                  <option value="Electrocucion">Electrocución</option>
                   <option value="Emision_Gases">Emisión de Gases</option>
+                  <option value="Fatiga">Fatiga</option>
                   <option value="Golpe_Contusion">Golpe o Contusión</option>
                   <option value="Insolacion_Deshidratacion">Insolación o Deshidratación</option>
-                  <option value="Lesion_Columna">Lesión de Columna</option>
-                  <option value="Lesion_Articulacion">Lesión en Articulación</option>
-                  <option value="Lesion_Tendon_Ligamento">Lesión en Tendón o Ligamento</option>
-                  <option value="Lesion_Osteomuscular">Lesión Osteomuscular</option>
+                  <option value="Laceracion_Corte">Laceración o Corte</option>
+                  <option value="Machucon">Machucón</option>
+                  <option value="Mala_Postura">Mala Postura</option>
                   <option value="Molestias_Irritacion">Molestias o Irritación</option>
                   <option value="Mordedura_Canina">Mordedura Canina</option>
                   <option value="Mordedura_Serpiente">Mordedura de Serpiente</option>
                   <option value="Orden_Publico">Orden Público</option>
                   <option value="Picadura_Abeja">Picadura de Abeja</option>
                   <option value="Picadura_Insecto">Picadura de Insecto</option>
-                  <option value="Riesgo_Psicosocial">Riesgo Psicosocial</option>
+                  <option value="Quemadura_Riesgo_Electrico">Quemadura por Riesgo Eléctrico</option>
+                  <option value="Quemadura_Solar">Quemadura Solar</option>
+                  <option value="Raspon_Abracion">Raspón o Abrasión</option>
                   <option value="Robo_Atraco">Robo o Atraco</option>
+                  <option value="Trauma_Craneoencefalico">Trauma Craneoencefálico</option>
                   <option value="Tropezon">Tropezón</option>
-                  <option value="Usuario_Conflictivo">Usuario Conflictivo</option>
                   <option value="Volcamiento">Volcamiento</option>
                 </select><br><br>
                 <label>Nivel (A, M):  
@@ -434,67 +480,52 @@
                 <select name="seguridad1">
                   <option value="">NA</option>
                   <option value="Comunicacion_Asertiva">Comunicación Asertiva</option>
-                  <option value="Distanciamiento_Animales">Distanciamiento (Perros, Abejas, Serpientes)</option>
-                  <option value="Distanciamiento_Usuario_Agresivo">Distanciamiento (Usuario Agresivo)</option>
-                  <option value="Higiene_Postural">Higiene Postural</option>
+                  <option value="Orden_Aseo_Areas_Trabajo">Orden y Aseo en Áreas de Trabajo</option>
                   <option value="Preoperacional_Vehiculo">Preoperacional de Vehículo</option>
+                  <option value="Puesto_Trabajo_Adecuado">Puesto de Trabajo Adecuado</option>
                   <option value="Respeto_Senales_Transito">Respeto de Señales de Tránsito</option>
-                  <option value="Respeto_Hacia_Usuario">Respeto Hacia el Usuario</option>
                   <option value="Ubicacion_Vehiculo_Zona_Segura">Ubicación de Vehículo en Zona Segura</option>
-                  <option value="Uso_Balaclava">Uso de Balaclava</option>
-                  <option value="Uso_Bloqueador_Solar">Uso de Bloqueador Solar</option>
                   <option value="Uso_Botas_Dielectricas_Antideslizantes">Uso de Botas (Dieléctricas, Antideslizantes)</option>
-                  <option value="Uso_Carne_Identificacion">Uso de Carné de Identificación Visible</option>
-                  <option value="Uso_Casco_Barbuquejo">Uso de Casco con Barbuquejo</option>
-                  <option value="Uso_Cinturon_Seguridad">Uso de Cinturón de Seguridad</option>
-                  <option value="Uso_Guantes_Vaqueta">Uso de Guantes de Vaqueta</option>
-                  <option value="Uso_Luces_Vehiculo">Uso de Luces Altas, Bajas, Estacionarias, Direccionales</option>
-                  <option value="Uso_Repelente">Uso de Repelente</option>
-                  <option value="Uso_Ropa_Operativa">Uso de Ropa Operativa</option>
+                  <option value="Uso_Cinturon_Seguridad_Airbag">Uso de Cinturón de Seguridad y Airbag</option>
+                  <option value="Uso_Dotacion_Completa_EPP">Uso de Dotación Completa y EPP</option>
+                  <option value="Uso_Herramientas_Dielectricas">Uso de Herramientas Dieléctricas</option>
+                  <option value="Uso_Kit_Guantes_Clase_2">Uso de Kit de Guantes Clase 2</option>
+                  <option value="Uso_Senalizacion_Area">Uso de Señalización de Área</option>
+                  <option value="Uso_Silla_Ergonomica">Uso de Silla Ergonómica</option>
                   <option value="Velocidad_Moderada">Velocidad Moderada</option>
                 </select><br><br>
                 <select name="seguridad2">
                   <option value="">NA</option>
                   <option value="Comunicacion_Asertiva">Comunicación Asertiva</option>
-                  <option value="Distanciamiento_Animales">Distanciamiento (Perros, Abejas, Serpientes)</option>
-                  <option value="Distanciamiento_Usuario_Agresivo">Distanciamiento (Usuario Agresivo)</option>
-                  <option value="Higiene_Postural">Higiene Postural</option>
+                  <option value="Orden_Aseo_Areas_Trabajo">Orden y Aseo en Áreas de Trabajo</option>
                   <option value="Preoperacional_Vehiculo">Preoperacional de Vehículo</option>
+                  <option value="Puesto_Trabajo_Adecuado">Puesto de Trabajo Adecuado</option>
                   <option value="Respeto_Senales_Transito">Respeto de Señales de Tránsito</option>
-                  <option value="Respeto_Hacia_Usuario">Respeto Hacia el Usuario</option>
                   <option value="Ubicacion_Vehiculo_Zona_Segura">Ubicación de Vehículo en Zona Segura</option>
-                  <option value="Uso_Balaclava">Uso de Balaclava</option>
-                  <option value="Uso_Bloqueador_Solar">Uso de Bloqueador Solar</option>
                   <option value="Uso_Botas_Dielectricas_Antideslizantes">Uso de Botas (Dieléctricas, Antideslizantes)</option>
-                  <option value="Uso_Carne_Identificacion">Uso de Carné de Identificación Visible</option>
-                  <option value="Uso_Casco_Barbuquejo">Uso de Casco con Barbuquejo</option>
-                  <option value="Uso_Cinturon_Seguridad">Uso de Cinturón de Seguridad</option>
-                  <option value="Uso_Guantes_Vaqueta">Uso de Guantes de Vaqueta</option>
-                  <option value="Uso_Luces_Vehiculo">Uso de Luces Altas, Bajas, Estacionarias, Direccionales</option>
-                  <option value="Uso_Repelente">Uso de Repelente</option>
-                  <option value="Uso_Ropa_Operativa">Uso de Ropa Operativa</option>
+                  <option value="Uso_Cinturon_Seguridad_Airbag">Uso de Cinturón de Seguridad y Airbag</option>
+                  <option value="Uso_Dotacion_Completa_EPP">Uso de Dotación Completa y EPP</option>
+                  <option value="Uso_Herramientas_Dielectricas">Uso de Herramientas Dieléctricas</option>
+                  <option value="Uso_Kit_Guantes_Clase_2">Uso de Kit de Guantes Clase 2</option>
+                  <option value="Uso_Senalizacion_Area">Uso de Señalización de Área</option>
+                  <option value="Uso_Silla_Ergonomica">Uso de Silla Ergonómica</option>
                   <option value="Velocidad_Moderada">Velocidad Moderada</option>
                 </select><br><br>
                 <select name="seguridad3">
                   <option value="">NA</option>
                   <option value="Comunicacion_Asertiva">Comunicación Asertiva</option>
-                  <option value="Distanciamiento_Animales">Distanciamiento (Perros, Abejas, Serpientes)</option>
-                  <option value="Distanciamiento_Usuario_Agresivo">Distanciamiento (Usuario Agresivo)</option>
-                  <option value="Higiene_Postural">Higiene Postural</option>
+                  <option value="Orden_Aseo_Areas_Trabajo">Orden y Aseo en Áreas de Trabajo</option>
                   <option value="Preoperacional_Vehiculo">Preoperacional de Vehículo</option>
+                  <option value="Puesto_Trabajo_Adecuado">Puesto de Trabajo Adecuado</option>
                   <option value="Respeto_Senales_Transito">Respeto de Señales de Tránsito</option>
-                  <option value="Respeto_Hacia_Usuario">Respeto Hacia el Usuario</option>
                   <option value="Ubicacion_Vehiculo_Zona_Segura">Ubicación de Vehículo en Zona Segura</option>
-                  <option value="Uso_Balaclava">Uso de Balaclava</option>
-                  <option value="Uso_Bloqueador_Solar">Uso de Bloqueador Solar</option>
                   <option value="Uso_Botas_Dielectricas_Antideslizantes">Uso de Botas (Dieléctricas, Antideslizantes)</option>
-                  <option value="Uso_Carne_Identificacion">Uso de Carné de Identificación Visible</option>
-                  <option value="Uso_Casco_Barbuquejo">Uso de Casco con Barbuquejo</option>
-                  <option value="Uso_Cinturon_Seguridad">Uso de Cinturón de Seguridad</option>
-                  <option value="Uso_Guantes_Vaqueta">Uso de Guantes de Vaqueta</option>
-                  <option value="Uso_Luces_Vehiculo">Uso de Luces Altas, Bajas, Estacionarias, Direccionales</option>
-                  <option value="Uso_Repelente">Uso de Repelente</option>
-                  <option value="Uso_Ropa_Operativa">Uso de Ropa Operativa</option>
+                  <option value="Uso_Cinturon_Seguridad_Airbag">Uso de Cinturón de Seguridad y Airbag</option>
+                  <option value="Uso_Dotacion_Completa_EPP">Uso de Dotación Completa y EPP</option>
+                  <option value="Uso_Herramientas_Dielectricas">Uso de Herramientas Dieléctricas</option>
+                  <option value="Uso_Kit_Guantes_Clase_2">Uso de Kit de Guantes Clase 2</option>
+                  <option value="Uso_Senalizacion_Area">Uso de Señalización de Área</option>
+                  <option value="Uso_Silla_Ergonomica">Uso de Silla Ergonómica</option>
                   <option value="Velocidad_Moderada">Velocidad Moderada</option>
                 </select><br><br>
                 </div>
@@ -507,6 +538,10 @@
                   <option value="Capacitacion_Autocuidado">Capacitación en Autocuidado</option>
                   <option value="Capacitacion_Brigadas_Emergencia">Capacitación en Brigadas de Emergencia</option>
                   <option value="Capacitacion_Caidas_Mismo_Nivel">Capacitación en Caídas al Mismo Nivel</option>
+                  <option value="Capacitacion_Identificacion_Condiciones_Inseguras">Capacitación en Identificación y Reporte de Condiciones Inseguras</option>
+                  <option value="Capacitacion_Inspeccion_Verificacion_Elementos_Trabajo">Capacitación en Inspección y Verificación de Elementos de Trabajo</option>
+                  <option value="Capacitacion_Manejo_Equipos_Medida_Directa_Semidirecta">Capacitación en Manejo de Equipos de Medida Directa y Semidirecta</option>
+                  <option value="Capacitacion_Manejo_Residuos_Solidos">Capacitación en Manejo de Residuos Sólidos</option>
                   <option value="Capacitacion_Manejo_Defensivo">Capacitación en Manejo Defensivo</option>
                   <option value="Capacitacion_Medio_Ambiente">Capacitación en Medio Ambiente</option>
                   <option value="Capacitacion_Mordedura_Canina">Capacitación en Mordedura Canina</option>
@@ -515,8 +550,9 @@
                   <option value="Capacitacion_Primeros_Auxilios">Capacitación en Primeros Auxilios</option>
                   <option value="Capacitacion_Riesgo_Biologico">Capacitación en Riesgo Biológico</option>
                   <option value="Capacitacion_Riesgo_Biomecanico">Capacitación en Riesgo Biomecánico</option>
+                  <option value="Capacitacion_Riesgo_Electrico">Capacitación en Riesgo Eléctrico</option>
                   <option value="Capacitacion_Riesgo_Ergonomico">Capacitación en Riesgo Ergonómico</option>
-                  <option value="Capacitacion_Riesgo_Psicosocial_Comunicacion_Asertiva">Capacitación en Riesgo Psicosocial y Comunicación Asertiva</option>
+                  <option value="Capacitacion_Riesgo_Mecanico">Capacitación en Riesgo Mecánico</option>
                   <option value="Capacitacion_Riesgo_Publico">Capacitación en Riesgo Público</option>
                   <option value="Capacitacion_Seguridad_Vial">Capacitación en Seguridad Vial</option>
                 </select><br><br>
@@ -525,6 +561,10 @@
                   <option value="Capacitacion_Autocuidado">Capacitación en Autocuidado</option>
                   <option value="Capacitacion_Brigadas_Emergencia">Capacitación en Brigadas de Emergencia</option>
                   <option value="Capacitacion_Caidas_Mismo_Nivel">Capacitación en Caídas al Mismo Nivel</option>
+                  <option value="Capacitacion_Identificacion_Condiciones_Inseguras">Capacitación en Identificación y Reporte de Condiciones Inseguras</option>
+                  <option value="Capacitacion_Inspeccion_Verificacion_Elementos_Trabajo">Capacitación en Inspección y Verificación de Elementos de Trabajo</option>
+                  <option value="Capacitacion_Manejo_Equipos_Medida_Directa_Semidirecta">Capacitación en Manejo de Equipos de Medida Directa y Semidirecta</option>
+                  <option value="Capacitacion_Manejo_Residuos_Solidos">Capacitación en Manejo de Residuos Sólidos</option>
                   <option value="Capacitacion_Manejo_Defensivo">Capacitación en Manejo Defensivo</option>
                   <option value="Capacitacion_Medio_Ambiente">Capacitación en Medio Ambiente</option>
                   <option value="Capacitacion_Mordedura_Canina">Capacitación en Mordedura Canina</option>
@@ -533,8 +573,9 @@
                   <option value="Capacitacion_Primeros_Auxilios">Capacitación en Primeros Auxilios</option>
                   <option value="Capacitacion_Riesgo_Biologico">Capacitación en Riesgo Biológico</option>
                   <option value="Capacitacion_Riesgo_Biomecanico">Capacitación en Riesgo Biomecánico</option>
+                  <option value="Capacitacion_Riesgo_Electrico">Capacitación en Riesgo Eléctrico</option>
                   <option value="Capacitacion_Riesgo_Ergonomico">Capacitación en Riesgo Ergonómico</option>
-                  <option value="Capacitacion_Riesgo_Psicosocial_Comunicacion_Asertiva">Capacitación en Riesgo Psicosocial y Comunicación Asertiva</option>
+                  <option value="Capacitacion_Riesgo_Mecanico">Capacitación en Riesgo Mecánico</option>
                   <option value="Capacitacion_Riesgo_Publico">Capacitación en Riesgo Público</option>
                   <option value="Capacitacion_Seguridad_Vial">Capacitación en Seguridad Vial</option>
                 </select><br><br>
@@ -543,6 +584,10 @@
                   <option value="Capacitacion_Autocuidado">Capacitación en Autocuidado</option>
                   <option value="Capacitacion_Brigadas_Emergencia">Capacitación en Brigadas de Emergencia</option>
                   <option value="Capacitacion_Caidas_Mismo_Nivel">Capacitación en Caídas al Mismo Nivel</option>
+                  <option value="Capacitacion_Identificacion_Condiciones_Inseguras">Capacitación en Identificación y Reporte de Condiciones Inseguras</option>
+                  <option value="Capacitacion_Inspeccion_Verificacion_Elementos_Trabajo">Capacitación en Inspección y Verificación de Elementos de Trabajo</option>
+                  <option value="Capacitacion_Manejo_Equipos_Medida_Directa_Semidirecta">Capacitación en Manejo de Equipos de Medida Directa y Semidirecta</option>
+                  <option value="Capacitacion_Manejo_Residuos_Solidos">Capacitación en Manejo de Residuos Sólidos</option>
                   <option value="Capacitacion_Manejo_Defensivo">Capacitación en Manejo Defensivo</option>
                   <option value="Capacitacion_Medio_Ambiente">Capacitación en Medio Ambiente</option>
                   <option value="Capacitacion_Mordedura_Canina">Capacitación en Mordedura Canina</option>
@@ -551,8 +596,9 @@
                   <option value="Capacitacion_Primeros_Auxilios">Capacitación en Primeros Auxilios</option>
                   <option value="Capacitacion_Riesgo_Biologico">Capacitación en Riesgo Biológico</option>
                   <option value="Capacitacion_Riesgo_Biomecanico">Capacitación en Riesgo Biomecánico</option>
+                  <option value="Capacitacion_Riesgo_Electrico">Capacitación en Riesgo Eléctrico</option>
                   <option value="Capacitacion_Riesgo_Ergonomico">Capacitación en Riesgo Ergonómico</option>
-                  <option value="Capacitacion_Riesgo_Psicosocial_Comunicacion_Asertiva">Capacitación en Riesgo Psicosocial y Comunicación Asertiva</option>
+                  <option value="Capacitacion_Riesgo_Mecanico">Capacitación en Riesgo Mecánico</option>
                   <option value="Capacitacion_Riesgo_Publico">Capacitación en Riesgo Público</option>
                   <option value="Capacitacion_Seguridad_Vial">Capacitación en Seguridad Vial</option>
                 </select><br><br>

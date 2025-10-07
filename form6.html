@@ -47,7 +47,7 @@
       <label>Hora: <input type="time" name="hora"></label><br>
       <label>Ciudad: <input type="text" name="ciudad"></label><br>
       <label>Actividad a Realizar:
-        <select name="act_1">
+        <select name="act_1" disabled>
           <option value="Actividades HSE">Actividades HSE</option>
         </select>
       </label><br>
@@ -246,7 +246,7 @@
       <legend>7. PLANIFICACION DIARIA DE SEGURIDAD Y AMBIENTE</legend>
       <p>Esta sección debe ser diligenciado en el sitio trabajo y firmado por el personal autorizado para esta labor.</p><br>
       <label>Actividad a Realizar:
-        <select name="act_1">
+        <select name="act_1" disabled>
           <option value="Actividades HSE">Actividades HSE</option>
         </select>
       </label><br>
@@ -346,7 +346,13 @@
                   <option value="Usuario_Conflictivo">Usuario Conflictivo</option>
                   <option value="Volcamiento">Volcamiento</option>
                 </select><br><br>
-                  <select name="riesgo2">
+                <label>Nivel (A, M):  
+                <select name="nivel[]">
+                  <option value="">NA</option>
+                  <option value="A">A</option>
+                  <option value="M">M</option>
+                </select><br><br>
+                <select name="riesgo2">
                   <option value="">NA</option>
                   <option value="Apatia_Desinteres">Apatía o Desinterés</option>
                   <option value="Atropellamiento">Atropellamiento</option>
@@ -373,7 +379,13 @@
                   <option value="Usuario_Conflictivo">Usuario Conflictivo</option>
                   <option value="Volcamiento">Volcamiento</option>
                 </select><br><br>
-                  <select name="riesgo3">
+                <label>Nivel (A, M):  
+                <select name="nivel[]">
+                  <option value="">NA</option>
+                  <option value="A">A</option>
+                  <option value="M">M</option>
+                </select><br><br>
+                <select name="riesgo3">
                   <option value="">NA</option>
                   <option value="Apatia_Desinteres">Apatía o Desinterés</option>
                   <option value="Atropellamiento">Atropellamiento</option>
@@ -400,9 +412,15 @@
                   <option value="Usuario_Conflictivo">Usuario Conflictivo</option>
                   <option value="Volcamiento">Volcamiento</option>
                 </select><br><br>
-                </div>
-                &nbsp; &nbsp; Otro Riesgo: <input type="text" name="b_control[]">
-              </label><br><br>
+                <label>Nivel (A, M):  
+                <select name="nivel[]">
+                  <option value="">NA</option>
+                  <option value="A">A</option>
+                  <option value="M">M</option>
+                </select>
+              </div><br>
+              &nbsp; Otro Riesgo: <input type="text" name="b_control[]">
+              </label><br>
               <label>Nivel (A, M):  
                 <select name="nivel[]">
                   <option value="">NA</option>
@@ -576,7 +594,6 @@
       <label>Hora Finalización Actividad: <input type="time" name="hora_fin"></label>
       </fieldset><br>
 
-      <p>Este documento y su contenido es propiedad intelectual de la Empresa de Energía de Boyacá S.A. E.S.P. EBSA; se prohíbe su reproducción parcial o total sin autorización escrita.</p><br>
       <input type="submit" value="Guardar">
 
       <script>
