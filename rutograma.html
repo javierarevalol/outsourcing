@@ -1,168 +1,361 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
-  <title>Rutograma</title>
+  <title>Rutograma v2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #111827;
+      --muted: #9ca3af;
+      --text: #e5e7eb;
+      --accent: #60a5fa;
+      --danger: #f87171;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --border: #1f2937;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #0b0f14 0%, #0e1620 100%);
+      color: var(--text);
+    }
+    .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    h1 { margin: 0 0 16px; font-size: 28px; letter-spacing: .3px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .stack { display: grid; gap: 16px; }
+    .muted { color: var(--muted); font-size: 13px; }
+    .tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); background: #0f172a; font-size: 12px; }
+    .tag.dot::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: currentColor; display: inline-block; }
+
+    /* Controls */
+    .controls { display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 680px) { .controls { grid-template-columns: 1fr auto; align-items: end; } }
+    .controls .left { display: grid; gap: 12px; }
+    .controls .group { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .segmented { display: inline-flex; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .segmented input { display: none; }
+    .segmented label { padding: 8px 12px; cursor: pointer; user-select: none; color: var(--muted); }
+    .segmented input:checked + label { color: var(--text); background: #0f172a; }
+
+    button {
+      background: #0f172a; border: 1px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 12px; cursor: pointer; font-weight: 600; transition: transform .02s ease, background .2s ease, border-color .2s ease; }
+    button:hover { border-color: #2b3341; }
+    button:active { transform: translateY(1px); }
+    button[disabled] { opacity: .5; cursor: not-allowed; }
+    .primary { background: #111c2e; border-color: #22304a; }
+    .danger { border-color: #3a1f1f; background: #1b0f0f; }
+    .success { border-color: #173226; background: #0f1e18; }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    thead th { text-align: left; font-size: 12px; color: var(--muted); font-weight: 700; border-bottom: 1px solid var(--border); padding: 10px 8px; }
+    tbody td { padding: 10px 8px; border-bottom: 1px solid var(--border); font-size: 14px; }
+    tbody tr:hover { background: rgba(255,255,255,.02); }
+    .mark { color: var(--warning); font-weight: 700; }
+    .finish { color: var(--success); font-weight: 700; }
+
+    .run-card { border-radius: 16px; border: 1px solid var(--border); padding: 14px; background: #0b1220; }
+    .run-header { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .run-title { font-weight: 700; }
+    .run-actions { display: flex; gap: 8px; }
+
+    .footer { margin-top: 26px; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12px; }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background: #0f172a; border: 1px solid var(--border); border-bottom-width: 2px; padding: 1px 6px; border-radius: 6px; color: var(--text); }
+  </style>
 </head>
 <body>
-  <h1>Rutograma</h1>
+  <div class="container stack">
+    <div class="card stack">
+      <div class="row" style="justify-content: space-between; align-items: start; gap: 16px;">
+        <div>
+          <h1>Rutograma</h1>
+          <div class="muted">Registra una ruta en vivo. Se agrega una ubicación automática cada 5s; puedes marcar riesgos y finalizar cuando llegues al destino.</div>
+        </div>
+        <div class="tag dot" id="liveTag" style="color: var(--danger);">● Detenido</div>
+      </div>
 
-  <!-- State toggle (no effect on control flow; just logged) -->
-  <div id="stateToggle">
-    <label><input type="radio" name="stateToggle" value="pavimentado" checked> Pavimentado </label>
-    <label><input type="radio" name="stateToggle" value="sin pavimentar"> Sin Pavimentar </label>
-  </div><br>
+      <div class="controls">
+        <div class="left">
+          <div class="group" id="stateToggle">
+            <div class="segmented" role="radiogroup" aria-label="Estado de la vía">
+              <input id="pav" type="radio" name="stateToggle" value="pavimentado" checked>
+              <label for="pav">Pavimentado</label>
+              <input id="unpav" type="radio" name="stateToggle" value="sin pavimentar">
+              <label for="unpav">Sin pavimentar</label>
+            </div>
+          </div>
 
-  <div>
-    <button id="btnMain">Ruta Principal</button>
-    <button id="btnSecondary">Ruta Secundaria</button>
-    <button id="btnMark" disabled>Condición de Riesgo</button>
-    <button id="btnFinish" disabled>Destino</button>
+          <div class="group">
+            <button id="btnMain" class="primary">Ruta Principal</button>
+            <button id="btnSecondary" class="primary">Ruta Secundaria</button>
+            <button id="btnMark" class="warning" disabled>Condición de Riesgo</button>
+            <button id="btnFinish" class="success" disabled>Destino</button>
+            <button id="btnPause" disabled>Pausar</button>
+          </div>
+        </div>
+        <div class="group">
+          <button id="btnExportAll">Exportar CSV (todas)</button>
+          <button id="btnClearAll" class="danger">Borrar todo</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="tables" class="stack"></div>
+
+    <div class="footer">
+      <div>Atajos: <span class="kbd">M</span> marcar riesgo · <span class="kbd">F</span> finalizar · <span class="kbd">P</span> pausar/continuar</div>
+      <div class="muted" id="clock"></div>
+    </div>
   </div>
-
-  <div id="tables"></div><br>
 
   <script>
     (function () {
-      const btnMain = document.getElementById('btnMain');
-      const btnSecondary = document.getElementById('btnSecondary');
-      const btnMark = document.getElementById('btnMark');
-      const btnFinish = document.getElementById('btnFinish');
-      const tablesWrap = document.getElementById('tables');
+      const $ = (s, d=document) => d.querySelector(s);
+      const $$ = (s, d=document) => Array.from(d.querySelectorAll(s));
+
+      const btnMain = $('#btnMain');
+      const btnSecondary = $('#btnSecondary');
+      const btnMark = $('#btnMark');
+      const btnFinish = $('#btnFinish');
+      const btnPause = $('#btnPause');
+      const btnExportAll = $('#btnExportAll');
+      const btnClearAll = $('#btnClearAll');
+      const tablesWrap = $('#tables');
+      const liveTag = $('#liveTag');
+      const clock = $('#clock');
 
       let intervalId = null;
-      let counter = 0;   // iteration index -> used to build nullX
-      let tbody = null;  // tbody of the active table (if any)
+      let counter = 0;   // ubicacionX
+      let tbody = null;  // tbody activo
       let running = false;
+      let paused = false;
+      let currentRunId = null; // para persistir
 
-      function setButtons({ main, secondary, mark, finish }) {
+      const LS_KEY = 'rutograma-runs-v2';
+
+      function setButtons({ main, secondary, mark, finish, pause }) {
         btnMain.disabled = !main;
         btnSecondary.disabled = !secondary;
         btnMark.disabled = !mark;
         btnFinish.disabled = !finish;
+        btnPause.disabled = !pause;
       }
 
-      function now() {
-        return new Date().toLocaleString();
+      function now() { return new Date(); }
+      function fmt(dt) { return dt.toLocaleString(); }
+      function currentState() { const el = document.querySelector('input[name="stateToggle"]:checked'); return el ? el.value : ''; }
+
+      function setLiveBadge() {
+        if (!running) { liveTag.style.color = 'var(--danger)'; liveTag.textContent = '● Detenido'; return; }
+        if (paused) { liveTag.style.color = 'var(--warning)'; liveTag.textContent = '● Pausado'; return; }
+        liveTag.style.color = 'var(--success)'; liveTag.textContent = '● Grabando';
       }
 
-      // Read current state from the radio group
-      function currentState() {
-        const el = document.querySelector('input[name="stateToggle"]:checked');
-        return el ? el.value : '';
-      }
+      function tickClock(){ clock.textContent = new Date().toLocaleString(); }
+      setInterval(tickClock, 1000); tickClock();
 
-      function createTable(runLabel) {
+      function createRunCard(runId, runLabel) {
         const runDiv = document.createElement('div');
+        runDiv.className = 'run-card';
+        runDiv.dataset.runId = runId;
 
+        const header = document.createElement('div');
+        header.className = 'run-header';
         const title = document.createElement('div');
+        title.className = 'run-title';
         title.textContent = runLabel;
-        runDiv.appendChild(title);
+        const actions = document.createElement('div');
+        actions.className = 'run-actions';
+
+        const btnExp = document.createElement('button');
+        btnExp.textContent = 'Exportar CSV';
+        btnExp.addEventListener('click', () => exportRunCSV(runId));
+
+        const btnDel = document.createElement('button');
+        btnDel.textContent = 'Eliminar';
+        btnDel.className = 'danger';
+        btnDel.addEventListener('click', () => deleteRun(runId));
+
+        actions.appendChild(btnExp);
+        actions.appendChild(btnDel);
+        header.appendChild(title);
+        header.appendChild(actions);
 
         const table = document.createElement('table');
         const thead = document.createElement('thead');
         const trHead = document.createElement('tr');
         ['Ruta', 'Ubicación', 'Hora', 'Pavimentado'].forEach(h => {
-          const th = document.createElement('th');
-          th.textContent = h;
-          trHead.appendChild(th);
+          const th = document.createElement('th'); th.textContent = h; trHead.appendChild(th);
         });
         thead.appendChild(trHead);
         table.appendChild(thead);
-
         const tb = document.createElement('tbody');
         table.appendChild(tb);
 
+        runDiv.appendChild(header);
         runDiv.appendChild(table);
-        tablesWrap.prepend(runDiv); // newest table on top
+        tablesWrap.prepend(runDiv); // la más reciente arriba
         return tb;
       }
 
-      function addRow(buttonText, valueText, timeText) {
+      function addRow(buttonText, valueText, when = now()) {
         const tr = document.createElement('tr');
-
         const tdBtn = document.createElement('td');
         tdBtn.textContent = buttonText || '';
-
+        if (buttonText === 'riesgo') tdBtn.classList.add('mark');
+        if (buttonText === 'destino') tdBtn.classList.add('finish');
         const tdVal = document.createElement('td');
         tdVal.textContent = valueText;
-
+        tdVal.contentEditable = 'true';
+        tdVal.spellcheck = false;
         const tdTime = document.createElement('td');
-        tdTime.textContent = timeText || now();
-
+        tdTime.textContent = typeof when === 'string' ? when : fmt(when);
         const tdState = document.createElement('td');
         tdState.textContent = currentState();
-
-        tr.appendChild(tdBtn);
-        tr.appendChild(tdVal);
-        tr.appendChild(tdTime);
-        tr.appendChild(tdState);
+        tr.appendChild(tdBtn); tr.appendChild(tdVal); tr.appendChild(tdTime); tr.appendChild(tdState);
         tbody.appendChild(tr);
+        persistAppend({ runId: currentRunId, row: { ruta: buttonText || '', ubicacion: valueText, hora: tdTime.textContent, pavimento: tdState.textContent } });
       }
 
-      function startAutoInterval() {
+      function startInterval() {
+        stopInterval();
         intervalId = setInterval(() => {
+          if (!running || paused) return;
           counter += 1;
           addRow('', `ubicacion${counter}`, now());
-        }, 5_000);
+        }, 5000);
       }
 
-      function restartAutoInterval() {
-        if (intervalId) clearInterval(intervalId);
-        startAutoInterval();
-      }
+      function stopInterval() { if (intervalId) clearInterval(intervalId); intervalId = null; }
 
       function startRun(startButtonName) {
         if (running) return;
-        running = true;
+        running = true; paused = false; setLiveBadge();
+        setButtons({ main: false, secondary: false, mark: true, finish: true, pause: true });
 
-        setButtons({ main: false, secondary: false, mark: true, finish: true });
+        const id = `run_${Date.now()}`; currentRunId = id;
+        const label = `Ruta "${startButtonName}" — ${fmt(now())}`;
+        tbody = createRunCard(id, label);
 
-        const label = `Ruta "${startButtonName}" — ${now()}`;
-        tbody = createTable(label);
-
-        // First record
+        // crear registro inicial
         counter = 1;
         addRow(startButtonName, `ubicacion${counter}`, now());
-
-        // Begin 5s auto-appends
-        startAutoInterval();
+        startInterval();
       }
 
       function markRun() {
-        if (!running) return;
-        // Append an immediate nullX row labeled as a mark, then restart the 5s timer
-        counter += 1;
-        addRow('riesgo', `ubicacion${counter}`, now());
-        restartAutoInterval();
-      }
+        if (!running) return; counter += 1; addRow('riesgo', `ubicacion${counter}`, now()); startInterval(); }
 
       function finishRun() {
         if (!running) return;
-
-        // On finish, advance to the next nullX and record it
-        counter += 1;
-        addRow('destino', `ubicacion${counter}`, now());
-
-        // Tear down
-        if (intervalId) clearInterval(intervalId);
-        intervalId = null;
-        tbody = null;
-        running = false;
-
-        // Reset buttons
-        setButtons({ main: true, secondary: true, mark: false, finish: false });
+        counter += 1; addRow('destino', `ubicacion${counter}`, now());
+        stopInterval(); tbody = null; running = false; paused = false; currentRunId = null; setLiveBadge();
+        setButtons({ main: true, secondary: true, mark: false, finish: false, pause: false });
       }
 
-      // Wire up buttons
+      function togglePause() {
+        if (!running) return;
+        paused = !paused; setLiveBadge();
+        btnPause.textContent = paused ? 'Continuar' : 'Pausar';
+      }
+
+      // ---- Persistencia local (localStorage) ----
+      function loadRuns() {
+        const raw = localStorage.getItem(LS_KEY);
+        if (!raw) return [];
+        try { return JSON.parse(raw); } catch { return []; }
+      }
+      function saveRuns(list) { localStorage.setItem(LS_KEY, JSON.stringify(list)); }
+
+      function persistAppend({ runId, row }) {
+        const runs = loadRuns();
+        let run = runs.find(r => r.id === runId);
+        if (!run) { run = { id: runId, label: $$(`[data-run-id="${runId}"] .run-title`)[0]?.textContent || '', rows: [] }; runs.unshift(run); }
+        run.rows.push(row); saveRuns(runs);
+      }
+
+      function exportCSV(rows, filename) {
+        const headers = ['Ruta','Ubicacion','Hora','Pavimentado'];
+        const csv = [headers.join(',')].concat(rows.map(r => [r.ruta, r.ubicacion, r.hora, r.pavimento].map(s => '"' + String(s).replaceAll('"','""') + '"').join(','))).join('\n');
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url);
+      }
+
+      function exportRunCSV(runId) {
+        const runs = loadRuns();
+        const run = runs.find(r => r.id === runId);
+        if (!run) return;
+        exportCSV(run.rows, `${run.label || run.id}.csv`);
+      }
+
+      function exportAllCSV() {
+        const runs = loadRuns();
+        const all = [];
+        runs.forEach(r => r.rows.forEach(row => all.push({ ...row, run: r.label })));
+        if (all.length === 0) return;
+        const headers = ['Run','Ruta','Ubicacion','Hora','Pavimentado'];
+        const csv = [headers.join(',')].concat(all.map(r => [r.run, r.ruta, r.ubicacion, r.hora, r.pavimento].map(s => '"' + String(s).replaceAll('"','""') + '"').join(','))).join('\n');
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = `rutograma_${Date.now()}.csv`; a.click(); URL.revokeObjectURL(url);
+      }
+
+      function deleteRun(runId) {
+        const runs = loadRuns().filter(r => r.id !== runId);
+        saveRuns(runs);
+        const card = $$(`[data-run-id="${runId}"]`)[0]; if (card) card.remove();
+      }
+
+      function clearAll() {
+        if (running) finishRun();
+        localStorage.removeItem(LS_KEY);
+        tablesWrap.innerHTML = '';
+      }
+
+      function restoreFromStorage() {
+        const runs = loadRuns();
+        runs.forEach(r => {
+          const tb = createRunCard(r.id, r.label || r.id);
+          r.rows.forEach(row => {
+            const tr = document.createElement('tr');
+            const tdBtn = document.createElement('td'); tdBtn.textContent = row.ruta; if (row.ruta==='riesgo') tdBtn.classList.add('mark'); if (row.ruta==='destino') tdBtn.classList.add('finish');
+            const tdVal = document.createElement('td'); tdVal.textContent = row.ubicacion; tdVal.contentEditable = 'true'; tdVal.spellcheck = false;
+            const tdTime = document.createElement('td'); tdTime.textContent = row.hora;
+            const tdState = document.createElement('td'); tdState.textContent = row.pavimento;
+            tr.appendChild(tdBtn); tr.appendChild(tdVal); tr.appendChild(tdTime); tr.appendChild(tdState);
+            tb.appendChild(tr);
+          });
+        });
+      }
+
+      // Eventos UI
       btnMain.addEventListener('click', () => startRun('ruta-principal'));
       btnSecondary.addEventListener('click', () => startRun('ruta-secundaria'));
       btnMark.addEventListener('click', markRun);
       btnFinish.addEventListener('click', finishRun);
+      btnPause.addEventListener('click', togglePause);
+      btnExportAll.addEventListener('click', exportAllCSV);
+      btnClearAll.addEventListener('click', clearAll);
 
-      // Initial state
-      setButtons({ main: true, secondary: true, mark: false, finish: false });
+      // Atajos
+      document.addEventListener('keydown', (e) => {
+        if (e.target && (e.target.isContentEditable || ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))) return;
+        if (e.key.toLowerCase() === 'm') { e.preventDefault(); markRun(); }
+        if (e.key.toLowerCase() === 'f') { e.preventDefault(); finishRun(); }
+        if (e.key.toLowerCase() === 'p') { e.preventDefault(); togglePause(); }
+      });
+
+      // Estado inicial
+      setButtons({ main: true, secondary: true, mark: false, finish: false, pause: false });
+      setLiveBadge();
+      restoreFromStorage();
     })();
   </script>
 </body>

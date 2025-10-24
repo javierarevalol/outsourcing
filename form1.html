@@ -1,796 +1,782 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Formulario de Seguridad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body {
-      margin: 0;
-      padding: 2em;
-      display: flex;
-      justify-content: center;
-    }
-    .a4-container {
-      width: 21cm;
-      min-height: 29.7cm;
-      background: white;
-      padding: 2em;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      box-sizing: border-box;
-    }
-    fieldset {
-      border: 1px solid #999;
-      padding: 1em;
-    }
-    legend h1 {
-      margin: 0;
-      font-size: 1.2em;
-    }
-    label {
-      display: block;
-      margin-bottom: 0.5em;
-    }
+    :root { --gap: 12px; --b: #999; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 2em; display: flex; justify-content: center; background: #f3f5f7; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    .a4-container { width: 21cm; min-height: 29.7cm; background: #fff; padding: 2em; box-shadow: 0 0 10px rgba(0,0,0,.15); }
+    fieldset { border: 1px solid var(--b); padding: 1em; margin-bottom: 1em; }
+    legend { font-weight: 600; }
+    label { display: block; margin-bottom: .5em; }
+    .row { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--gap); }
+    .muted { color: #667085; font-size: .9em; }
+    .hr { border: 0; border-top: 1px dashed #cbd5e1; margin: 10px 0; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    button { padding: .5em .8em; border: 1px solid #334155; background: #0f172a; color: #fff; border-radius: 6px; cursor: pointer; }
+    button.secondary { background: #fff; color: #0f172a; border-color: #94a3b8; }
+    button.link { background: transparent; color: #0f172a; border: none; text-decoration: underline; padding: 0; }
+    .repeater { border: 1px dashed #cbd5e1; padding: .75em; border-radius: 8px; margin: .5em 0 1em; }
+    .repeat-item { border: 1px solid #e2e8f0; padding: .75em; border-radius: 8px; margin-bottom: .75em; background: #fafafa; }
+    .repeat-item .inline { display: grid; grid-template-columns: 1fr 120px auto; gap: var(--gap); align-items: end; }
+    .repeat-item .inline-2 { display: grid; grid-template-columns: 1fr 1fr auto; gap: var(--gap); align-items: end; }
+    .note { background: #fffbeb; border: 1px solid #f59e0b; color: #78350f; padding: .75em; border-radius: 8px; }
+    input[type="text"], input[type="time"], input[type="date"], select { width: 100%; padding: .5em .6em; border: 1px solid #94a3b8; border-radius: 6px; }
+    input[disabled], select[disabled] { background: #f8fafc; color: #64748b; }
   </style>
 </head>
 <body>
-        <div class="container"> 
-            <div class="row">  
-                <div class="col-lg-12">
-  <fieldset>
-    <legend><h2>Formulario de Seguridad</h2></legend>
-    <form>
+  <div class="a4-container">
+    <fieldset>
+      <legend><h2 style="margin:0">Formulario de Seguridad</h2></legend>
+      <form>
 
-      <!-- CONDICIONES GENERALES -->
-      <fieldset>
-      <legend>1. CONDICIONES GENERALES</legend>
-      <label>Fecha: <input type="date" name="fecha"></label><br>
-      <label>Hora: <input type="time" name="hora"></label><br>
-      <label>Ciudad: <input type="text" name="ciudad"></label><br>
-      <label>Actividad a Realizar:
-        <select name="act_1">
-          <option value="Revisión e Instalación de Equipos de Medida Directa">Revisión e Instalación de Equipos de Medida Directa</option>
-          <option value="Verificación de Amarres">Verificación de Amarres</option>
-          <option value="Primera Lectura">Primera Lectura</option>
-          <option value="Segunda Lectura">Segunda Lectura</option>
-          <option value="Lectura de Macromedidas">Lectura de Macromedidas</option>
-          <option value="Revisión de Fronteras">Revisión de Fronteras</option>
-          <option value="Censo Alumbrado Navideño">Censo Alumbrado Navideño</option>
-          <option value="Alumbrado Público">Alumbrado Público</option>
-          <option value="Normalización">Normalización</option>
-          <option value="Instalación de Macromedidas">Instalación de Macromedidas</option>
-        </select>
-      </label><br>
-      <label>Número de Evento u Orden de Trabajo: <input type="text" name="numero_evento"></label><br>
-      <label>Municipio Donde se Realiza: <input type="text" name="municipio"></label><br>
-      <label>Barrio/Vereda: <input type="text" name="barrio_vereda"></label>
-      <p>De acuerdo a la actividad a realizar, se debe cumplir con la información solicitada de lo contrario debe verificarse para poder continuar.</p>
-      </fieldset><br>
-      
-      <!-- IDENTIFIQUE EL PROCESO AL CUAL PERTENECE LA ACTIVIDAD A DESARROLLAR -->
-      <fieldset>
-      <legend>2. IDENTIFIQUE EL PROCESO AL CUAL PERTENECE LA ACTIVIDAD A DESARROLLAR</legend>
-      <label>Proceso de Generación 
-          <select name="cert_1">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>Proceso de Distribución - Energizadas 
-          <select name="cert_2">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>Proceso de Distribución - Desenergizadas 
-          <select name="cert_3">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>Proceso de Transmisión 
-          <select name="cert_4">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>Proceso Comercial 
-          <select name="cert_5">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>Área Almacén 
-          <select name="cert_6">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>Otro: 
-          <h2>Proyecto PERPE</h2>
-      </label>
-      <p>El grupo de trabajo debe identificar el proceso al cual pertenece la actividad que se va a desarrollar. Tenga en cuenta que este análisis es para actividades consideradas como CRITICAS, o donde se involucren tareas como: Trabajo en alturas, exposición a energía eléctrica, transporte en vehículos o motocicletas, entre otros.</p>
-      </fieldset><br>
-      
-      <!-- UBICACIÓN DE LOS CIRCUITOS Y EQUIPOS A INTERVENIR -->
-      <fieldset>
-      <legend>3. UBICACIÓN DE LOS CIRCUITOS Y EQUIPOS A INTERVENIR</legend>
-      <p>Solo aplica cuando se plantea realizar una actividad donde se intervienen redes o equipos eléctricos.</p><br>
-      <label>Subestación: <input type="text" name="subestacion"></label><br>
-      <label>Circuito: <input type="text" name="circuito"></label><br>
-      <label>Nodo Transformador: <input type="text" name="nodo_transformador"></label><br>
-      <label>Nivel de Tensión: <input type="text" name="nivel_tension"></label><br>
-      <label>Número de Cuentas: <input type="text" name="numero_cuentas"></label><br>
-      <button type="submit" value="rutograma">Cargar el Diagrama del Circuito</button>
-      </fieldset><br>
-
-      <!-- CERTIFICACION DE INFORMACION PRELIMINAR -->
-      <fieldset>
-      <legend>4. CERTIFICACION DE INFORMACION PRELIMINAR</legend>
-      <label>¿Se definió y suministró la cantidad de material, herramientas y equipos de seguridad críticos para el desarrollo del trabajo? 
-          <select name="cert_8">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>¿Se definió, alistó, revisó y verificó el equipo de protección personal y de protección contra caídas necesario para el desarrollo del trabajo? 
-          <select name="cert_9">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>¿Para las condiciones del trabajo es suficiente el personal asignado? 
-          <select name="cert_10">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>¿Todos los integrantes del grupo de trabajo están enterados del trabajo programado y sus riesgos? 
-          <select name="cert_11">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>¿El vehículo o motocicleta cuenta con la planilla de alistamiento correctamente diligenciada? 
-          <select name="cert_12">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>¿Se cuenta con permisos ambientales para realizar la actividad? 
-          <select name="cert_13">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>¿Se cuenta con elementos para el manejo de contingencias ambientales (kit de derrames, señalización, bandejas, tarjetas de emergencia, etc)? 
-          <select name="cert_14">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>¿Se cuenta con contenedores y bolsas para el manejo de residuos (incluidos los del COVID)? 
-          <select name="cert_15">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>¿Se dispone de elementos o equipo básico para atención de Primeros Auxilios (botiquín, camillas, canguro del liniero, etc)? 
-          <select name="cert_16">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br><br>
-      <label>En caso de emergencia médica o ambiental comunicarse a estos números:</label>
-      <h3>&nbsp; &nbsp; 3228126264</h3>
-      <h3>&nbsp; &nbsp; #888</h3><br>
-      <label>¿Los trabajadores están afiliados al sistema de Seguridad Social?</label><br>
-      <label>ARL: 
-          <select name="cert_17">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>PENSIÓN: 
-          <select name="cert_18">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>SALUD: 
-          <select name="cert_19">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label>
-      <p>Identifique todas las condiciones anteriores diligenciando SI o NA (no aplica) dependiendo la actividad a realizar. Si es un requisito para esa tarea y NO se tiene, el grupo de trabajo no puede salir y debe reportarse esa condición al Jefe Inmediato.</p>
-      </fieldset><br>
-      
-      <!-- RUTOGRAMA -->
-      <fieldset>
-        <legend>5. RUTOGRAMA</legend>
-        <p>Identifique el origen , destino la ruta y condiciones de riesgo para hacer la actividad.</p>
-        <button type="button" onclick="location.href='rutograma.html'">
-          Cargar el Rutograma
-        </button>
-      </fieldset><br>
-
-      <!-- FUNCIONARIOS AUTORIZADOS PARA REALIZAR LA LABOR -->
-      <fieldset>
-      <legend>6. FUNCIONARIOS AUTORIZADOS PARA REALIZAR LA LABOR</legend>
-      <p>Esta sección debe ser diligenciada antes de salir de la sede de trabajo y firmada por los que participan en ella.</p><br>
-      <div class="firma-container">
-        <div class="firma-entry">
-          <label>Nombres: <input type="text" name="nombres[]" disabled></label><br>
-          <label>Firma: <input type="text" name="firma[]" disabled></label><br>
-          <a href="login.html">Firmar</a>
-          <button type="button" onclick="eliminarFirma(this)">Quitar</button>
-          <hr>
-        </div>
-      </div>
-      <button type="button" onclick="agregarFirma(this)">Agregar</button>
-      </fieldset><br>
-
-      <p>Si antes de salir de la sede se realiza una actividad que pueda generar un RIESGO ALTO, se debe identificar, analizar e implementar las barreras de control, de seguridad o de soporte necesarias y diligenciar la sección 8 de este formato.</p><br>
-      
-      <!-- PLANIFICACION DIARIA DE SEGURIDAD Y AMBIENTE -->
-      <fieldset>
-      <legend>7. PLANIFICACION DIARIA DE SEGURIDAD Y AMBIENTE</legend>
-      <p>Esta sección debe ser diligenciado en el sitio trabajo y firmado por el personal autorizado para esta labor.</p><br>
-      <label>Actividad a Realizar:
-        <select name="act_1">
-          <option value="Revisión e Instalación de Equipos de Medida Directa">Revisión e Instalación de Equipos de Medida Directa</option>
-          <option value="Verificación de Amarres">Verificación de Amarres</option>
-          <option value="Primera Lectura">Primera Lectura</option>
-          <option value="Segunda Lectura">Segunda Lectura</option>
-          <option value="Lectura de Macromedidas">Lectura de Macromedidas</option>
-          <option value="Revisión de Fronteras">Revisión de Fronteras</option>
-          <option value="Censo Alumbrado Navideño">Censo Alumbrado Navideño</option>
-          <option value="Alumbrado Público">Alumbrado Público</option>
-          <option value="Normalización">Normalización</option>
-          <option value="Instalación de Macromedidas">Instalación de Macromedidas</option>
-        </select>
-      </label><br>
-      <label>Hora: <input type="time" name="hora2"></label><br>
-      <fieldset>
-      <p>Si la actividad a realizar se considera trabajo en alturas confirme:</p><br>
-      <label>¿Cuentan con certificación para trabajo seguro en alturas? 
-          <select name="cert_20">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>Altura aproximada a la cual se va a desarrollar la actividad: <input type="text" name="cert_21"></label><br>
-      <label>Urbano/Rural 
-          <select name="cert_21">
-          <option value="">NA</option>
-          <option value="URBANO">Urbano</option>
-          <option value="RURAL">Rural</option>
-          </select>
-      </label><br>
-      <fieldset>
-      <p>Sistema de acceso a utilizar:</p><br>
-      <label>Grúa con Canasta 
-          <select name="cert_22">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>Escalera Dieléctrica 
-          <select name="cert_23">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>Pretales 
-          <select name="cert_24">
-          <option value="">NA</option>
-          <option value="SI">SI</option>
-          <option value="NO">NO</option>
-          </select>
-      </label><br>
-      <label>Otro: <input type="text" name="cert_25"></label>
-      </fieldset>
-      <p>IMPORTANTE: SI LA ACTIVIDAD SE CONSIDERA COMO TRABAJO EN ALTURAS (1,5 METROS) Y NO HAY POR LO MENOS DOS TRABAJADORES CERTIFICADOS Y CON TODOS SUS EQUIPOS DE PROTECCION CONTRA CAIDAS, ACORDE AL SISTEMA DE ACCESO A UTILIZAR (ARNES, ESLINGA DE POSICIONAMIENTO, ESLINGA DE RESTRICCION O ESLINGA EN Y) PARA HACER ESTA ACTIVIDAD, ABSTENGASE DE REALIZAR EL TRABAJO Y REPORTE AL JEFE INMEDIATO.</p>
-      </fieldset>
-      </fieldset><br>
-
-      <!-- ANALISIS DEL RIESGO SEGURIDAD Y AMBIENTE -->
-      <fieldset>
-      <legend>8. ANALISIS DEL RIESGO SEGURIDAD Y AMBIENTE</legend>
-      <fieldset>
-      <legend>BARRERAS A IMPLEMENTAR</legend>
-      <div class="firma-container">
-        <div class="firma-entry">
-          <label>Paso a Paso de la Actividad:
-              <select name="act_2">
-                <option value="">NA</option>
-                <option value="Planeación de Actividad. Alistamiento de Herramienta y Vehículo">1. Planeación de Actividad. Alistamiento de Herramienta y Vehículo</option>
-                <option value="Desplazamiento en Vehículo. De Oficina a Sitio de Trabajo">2. Desplazamiento en Vehículo. De Oficina a Sitio de Trabajo</option>
-                <option value="Acta de Verificación e Instalación CTA">3. Acta de Verificación e Instalación CTA</option>
-                <option value="Desplazamiento Peatonal. Verificación Visual">4. Desplazamiento Peatonal. Verificación Visual</option>
-                <option value="Inspección Visual de Área de Trabajo en Cuadrilla. Presentación al Usuario y Señalización Área de Trabajo">5. Inspección Visual de Área de Trabajo en Cuadrilla. Presentación al Usuario y Señalización Área de Trabajo</option>
-                <option value="Revisión a Grupo de Medida. Verificación de Tensión y Retiro de Sellos">6. Revisión a Grupo de Medida. Verificación de Tensión y Retiro de Sellos</option>
-                <option value="Desconexión y Aislamiento de Parciales de Carga del Usuario">7. Desconexión y Aislamiento de Parciales de Carga del Usuario</option>
-                <option value="Conexión Carga Resistiva. Pruebas a Medidor y Toma de Datos">8. Conexión Carga Resistiva. Pruebas a Medidor y Toma de Datos</option>
-                <option value="Retiro de Carga Resistiva. Desconexión de Medidor y Aislamieno Puntas">8.1. Retiro de Carga Resistiva. Desconexión de Medidor y Aislamieno Puntas</option>
-                <option value="Montaje y Conexionado de Nuevo Medidor. Pruebas de Funcionamiento">8.2. Montaje y Conexionado de Nuevo Medidor. Pruebas de Funcionamiento</option>
-                <option value="Conexión de Parciales de Carga. Restablecimiento de Servicio">9. Conexión de Parciales de Carga. Restablecimiento de Servicio</option>
-                <option value="Sellado de Medidor. Recolección de Residuos Sólidos">10. Sellado de Medidor. Recolección de Residuos Sólidos</option>
-                <option value="Ascenso a Estructura o Poste (Pretales)">11. Ascenso a Estructura o Poste (Pretales)</option>
-                <option value="Posicionamiento de Escalera en Estructura. Anclaje y Montaje de Línea de Vida">11.1. Posicionamiento de Escalera en Estructura. Anclaje y Montaje de Línea de Vida</option>
-                <option value="Ascenso a Estructura. Posicionamiento y Toma de Datos">11.2. Ascenso a Estructura. Posicionamiento y Toma de Datos</option>
-                <option value="Anclaje y Posicionamiento en Altura. Toma de Datos y Registro Fotográfico">12. Anclaje y Posicionamiento en Altura. Toma de Datos y Registro Fotográfico</option>
-                <option value="Descenso de Estructura o Poste">13. Descenso de Estructura o Poste</option>
-                <option value="Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina">14. Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina</option>
-              </select><br><br>
-              &nbsp; &nbsp; Otra Actividad: <input type="text" name="b_control[]">
-          </label><br>
-          <fieldset>
-          <div class="firma-container">
-            <div class="firma-entry">
-              <label>Riesgo Potencial en Seguridad y Ambiente:<br><br>
-                <div class="row">
-                  <select name="riesgo1">
-                    <option value="">NA</option>
-                    <option value="Apatia_o_Desinteres">Apatía o Desinterés</option>
-                    <option value="Aplastamiento">Aplastamiento</option>
-                    <option value="Arco_Electrico">Arco Eléctrico</option>
-                    <option value="Atrapamiento">Atrapamiento</option>
-                    <option value="Atropellamiento">Atropellamiento</option>
-                    <option value="Caida_Diferente_Nivel">Caída a Diferente Nivel</option>
-                    <option value="Caida_Mismo_Nivel">Caída al Mismo Nivel</option>
-                    <option value="Caida_Objetos">Caída de Objetos</option>
-                    <option value="Choque">Choque</option>
-                    <option value="Colision">Colisión</option>
-                    <option value="Contacto_Electrico">Contacto Eléctrico</option>
-                    <option value="Derrumbe">Derrumbe</option>
-                    <option value="Electrocucion">Electrocución</option>
-                    <option value="Emision_Gases">Emisión de Gases</option>
-                    <option value="Fatiga">Fatiga</option>
-                    <option value="Fractura">Fractura</option>
-                    <option value="Golpe_Contusion">Golpe o Contusión</option>
-                    <option value="Insolacion_Deshidratacion">Insolación o Deshidratación</option>
-                    <option value="Laceracion_Corte">Laceración o Corte</option>
-                    <option value="Lesion_Columna">Lesión de Columna</option>
-                    <option value="Lesion_Articulacion">Lesión en Articulación</option>
-                    <option value="Lesion_Tendon_Ligamento">Lesión en Tendón o Ligamento</option>
-                    <option value="Lesion_Osteomuscular">Lesión Osteomuscular</option>
-                    <option value="Machucon">Machucón</option>
-                    <option value="Mala_Postura">Mala Postura</option>
-                    <option value="Molestias_Irritacion">Molestias o Irritación</option>
-                    <option value="Mordedura_Canina">Mordedura Canina</option>
-                    <option value="Mordedura_Serpiente">Mordedura de Serpiente</option>
-                    <option value="Muerte">Muerte</option>
-                    <option value="Orden_Publico">Orden Público</option>
-                    <option value="Picadura_Abeja">Picadura de Abeja</option>
-                    <option value="Picadura_Insecto">Picadura de Insecto</option>
-                    <option value="Quemadura_Segundo_Grado">Quemadura de Segundo Grado</option>
-                    <option value="Quemadura_Tercer_Grado">Quemadura de Tercer Grado</option>
-                    <option value="Quemadura_Riesgo_Electrico">Quemadura por Riesgo Eléctrico</option>
-                    <option value="Quemadura_Solar">Quemadura Solar</option>
-                    <option value="Raspon_Abrasion">Raspón o Abrasión</option>
-                    <option value="Riesgo_Psicosocial">Riesgo Psicosocial</option>
-                    <option value="Robo_Atraco">Robo o Atraco</option>
-                    <option value="Trauma_Craneoencefalico">Trauma Craneoencefálico</option>
-                    <option value="Tropezon">Tropezón</option>
-                    <option value="Usuario_Conflictivo">Usuario Conflictivo</option>
-                    <option value="Volcamiento">Volcamiento</option>
-                  </select><br><br>
-                <label>Nivel (A, M):  
-                <select name="nivel[]">
-                  <option value="">NA</option>
-                  <option value="A">A</option>
-                  <option value="M">M</option>
-                </select><br><br>
-                <select name="riesgo2">
-                    <option value="">NA</option>
-                    <option value="Apatia_o_Desinteres">Apatía o Desinterés</option>
-                    <option value="Aplastamiento">Aplastamiento</option>
-                    <option value="Arco_Electrico">Arco Eléctrico</option>
-                    <option value="Atrapamiento">Atrapamiento</option>
-                    <option value="Atropellamiento">Atropellamiento</option>
-                    <option value="Caida_Diferente_Nivel">Caída a Diferente Nivel</option>
-                    <option value="Caida_Mismo_Nivel">Caída al Mismo Nivel</option>
-                    <option value="Caida_Objetos">Caída de Objetos</option>
-                    <option value="Choque">Choque</option>
-                    <option value="Colision">Colisión</option>
-                    <option value="Contacto_Electrico">Contacto Eléctrico</option>
-                    <option value="Derrumbe">Derrumbe</option>
-                    <option value="Electrocucion">Electrocución</option>
-                    <option value="Emision_Gases">Emisión de Gases</option>
-                    <option value="Fatiga">Fatiga</option>
-                    <option value="Fractura">Fractura</option>
-                    <option value="Golpe_Contusion">Golpe o Contusión</option>
-                    <option value="Insolacion_Deshidratacion">Insolación o Deshidratación</option>
-                    <option value="Laceracion_Corte">Laceración o Corte</option>
-                    <option value="Lesion_Columna">Lesión de Columna</option>
-                    <option value="Lesion_Articulacion">Lesión en Articulación</option>
-                    <option value="Lesion_Tendon_Ligamento">Lesión en Tendón o Ligamento</option>
-                    <option value="Lesion_Osteomuscular">Lesión Osteomuscular</option>
-                    <option value="Machucon">Machucón</option>
-                    <option value="Mala_Postura">Mala Postura</option>
-                    <option value="Molestias_Irritacion">Molestias o Irritación</option>
-                    <option value="Mordedura_Canina">Mordedura Canina</option>
-                    <option value="Mordedura_Serpiente">Mordedura de Serpiente</option>
-                    <option value="Muerte">Muerte</option>
-                    <option value="Orden_Publico">Orden Público</option>
-                    <option value="Picadura_Abeja">Picadura de Abeja</option>
-                    <option value="Picadura_Insecto">Picadura de Insecto</option>
-                    <option value="Quemadura_Segundo_Grado">Quemadura de Segundo Grado</option>
-                    <option value="Quemadura_Tercer_Grado">Quemadura de Tercer Grado</option>
-                    <option value="Quemadura_Riesgo_Electrico">Quemadura por Riesgo Eléctrico</option>
-                    <option value="Quemadura_Solar">Quemadura Solar</option>
-                    <option value="Raspon_Abrasion">Raspón o Abrasión</option>
-                    <option value="Riesgo_Psicosocial">Riesgo Psicosocial</option>
-                    <option value="Robo_Atraco">Robo o Atraco</option>
-                    <option value="Trauma_Craneoencefalico">Trauma Craneoencefálico</option>
-                    <option value="Tropezon">Tropezón</option>
-                    <option value="Usuario_Conflictivo">Usuario Conflictivo</option>
-                    <option value="Volcamiento">Volcamiento</option>
-                  </select><br><br>
-                <label>Nivel (A, M):  
-                <select name="nivel[]">
-                  <option value="">NA</option>
-                  <option value="A">A</option>
-                  <option value="M">M</option>
-                </select><br><br>
-                <select name="riesgo3">
-                    <option value="">NA</option>
-                    <option value="Apatia_o_Desinteres">Apatía o Desinterés</option>
-                    <option value="Aplastamiento">Aplastamiento</option>
-                    <option value="Arco_Electrico">Arco Eléctrico</option>
-                    <option value="Atrapamiento">Atrapamiento</option>
-                    <option value="Atropellamiento">Atropellamiento</option>
-                    <option value="Caida_Diferente_Nivel">Caída a Diferente Nivel</option>
-                    <option value="Caida_Mismo_Nivel">Caída al Mismo Nivel</option>
-                    <option value="Caida_Objetos">Caída de Objetos</option>
-                    <option value="Choque">Choque</option>
-                    <option value="Colision">Colisión</option>
-                    <option value="Contacto_Electrico">Contacto Eléctrico</option>
-                    <option value="Derrumbe">Derrumbe</option>
-                    <option value="Electrocucion">Electrocución</option>
-                    <option value="Emision_Gases">Emisión de Gases</option>
-                    <option value="Fatiga">Fatiga</option>
-                    <option value="Fractura">Fractura</option>
-                    <option value="Golpe_Contusion">Golpe o Contusión</option>
-                    <option value="Insolacion_Deshidratacion">Insolación o Deshidratación</option>
-                    <option value="Laceracion_Corte">Laceración o Corte</option>
-                    <option value="Lesion_Columna">Lesión de Columna</option>
-                    <option value="Lesion_Articulacion">Lesión en Articulación</option>
-                    <option value="Lesion_Tendon_Ligamento">Lesión en Tendón o Ligamento</option>
-                    <option value="Lesion_Osteomuscular">Lesión Osteomuscular</option>
-                    <option value="Machucon">Machucón</option>
-                    <option value="Mala_Postura">Mala Postura</option>
-                    <option value="Molestias_Irritacion">Molestias o Irritación</option>
-                    <option value="Mordedura_Canina">Mordedura Canina</option>
-                    <option value="Mordedura_Serpiente">Mordedura de Serpiente</option>
-                    <option value="Muerte">Muerte</option>
-                    <option value="Orden_Publico">Orden Público</option>
-                    <option value="Picadura_Abeja">Picadura de Abeja</option>
-                    <option value="Picadura_Insecto">Picadura de Insecto</option>
-                    <option value="Quemadura_Segundo_Grado">Quemadura de Segundo Grado</option>
-                    <option value="Quemadura_Tercer_Grado">Quemadura de Tercer Grado</option>
-                    <option value="Quemadura_Riesgo_Electrico">Quemadura por Riesgo Eléctrico</option>
-                    <option value="Quemadura_Solar">Quemadura Solar</option>
-                    <option value="Raspon_Abrasion">Raspón o Abrasión</option>
-                    <option value="Riesgo_Psicosocial">Riesgo Psicosocial</option>
-                    <option value="Robo_Atraco">Robo o Atraco</option>
-                    <option value="Trauma_Craneoencefalico">Trauma Craneoencefálico</option>
-                    <option value="Tropezon">Tropezón</option>
-                    <option value="Usuario_Conflictivo">Usuario Conflictivo</option>
-                    <option value="Volcamiento">Volcamiento</option>
-                  </select><br><br>
-                <label>Nivel (A, M):  
-                <select name="nivel[]">
-                  <option value="">NA</option>
-                  <option value="A">A</option>
-                  <option value="M">M</option>
-                </select>
-              </div><br>
-              &nbsp; Otro Riesgo: <input type="text" name="b_control[]">
-              </label><br>
-              <label>Nivel (A, M):  
-                <select name="nivel[]">
-                  <option value="">NA</option>
-                  <option value="A">A</option>
-                  <option value="M">M</option>
-                </select>
-              </label><br><br>
-              <label>Barreras de Control: <input type="text" name="b_control[]" value="NA" disabled></label><br><br>
-              <label>Barreras de Seguridad:<br><br>
-                <div class="row">
-                <select name="seguridad1">
-                  <option value="">NA</option>
-                  <option value="Ropa Operativa">Ropa Operativa</option>
-                  <option value="Botas dieléctricas y antideslizantes">Botas dieléctricas y antideslizantes</option>
-                  <option value="Guantes de vaqueta">Guantes de vaqueta</option>
-                  <option value="Vista panorámica">Vista panorámica</option>
-                  <option value="Uso de cinturón de seguridad">Uso de cinturón de seguridad</option>
-                  <option value="Uso de luces altas bajas, estacionarias, direccionales">Uso de luces altas bajas, estacionarias, direccionales</option>
-                  <option value="Velocidad moderada">Velocidad moderada</option>
-                  <option value="Respeto de señales de tránsito">Respeto de señales de tránsito</option>
-                  <option value="Preoperacional de vehículo">Preoperacional de vehículo</option>
-                  <option value="Planificación de desplazamiento">Planificación de desplazamiento</option>
-                  <option value="Casco, balaclava, guantes de vaqueta">Casco, balaclava, guantes de vaqueta</option>
-                  <option value="Bloqueador solar">Bloqueador solar</option>
-                  <option value="Repelente">Repelente</option>
-                  <option value="Distanciamiento con (perros, abejas y serpientes)">Distanciamiento con (perros, abejas y serpientes)</option>
-                  <option value="Usar cebra peatonal">Usar cebra peatonal</option>
-                  <option value="Hidratación con agua o suero">Hidratación con agua o suero</option>
-                  <option value="Distanciamiento con (usuario agresivo, perros, abejas y serpientes)">Distanciamiento con (usuario agresivo, perros, abejas y serpientes)</option>
-                  <option value="Comunicación asertiva">Comunicación asertiva</option>
-                  <option value="Ubicación de vehículo en zona segura">Ubicación de vehículo en zona segura</option>
-                  <option value="Uso visible de carné de identificación">Uso visible de carné de identificación</option>
-                  <option value="Conos y cinta de señalización">Conos y cinta de señalización</option>
-                  <option value="Respeto hacia el usuario">Respeto hacia el usuario</option>
-                  <option value="Uso de kit de guantes clase 0, pantalla protección facial">Uso de kit de guantes clase 0, pantalla protección facial</option>
-                  <option value="Balaclava, guantes de vaqueta">Balaclava, guantes de vaqueta</option>
-                  <option value="Detector de ausencia de tensión">Detector de ausencia de tensión</option>
-                  <option value="Casco con barbuquejo">Casco con barbuquejo</option>
-                  <option value="Uso de recipiente para almacenamiento de residuos">Uso de recipiente para almacenamiento de residuos</option>
-                  <option value="Herramientas manuales en buen estado">Herramientas manuales en buen estado</option>
-                  <option value="Recipiente para residuos disposición final">Recipiente para residuos disposición final</option>
-                  <option value="Gafas de seguridad">Gafas de seguridad</option>
-                  <option value="Contenedor de residuos">Contenedor de residuos</option>
-                  <option value="Revisión de estructura (Poste)">Revisión de estructura (Poste)</option>
-                  <option value="Revisión de estado de sistema de acceso (Escalera, Pretales)">Revisión de estado de sistema de acceso (Escalera, Pretales)</option>
-                  <option value="Revisión de equipos contra caídas (Tie off, Eslinga de posicionamiento, Mosquetón)">Revisión de equipos contra caídas (Tie off, Eslinga de posicionamiento, Mosquetón)</option>
-                  <option value="Uso de kit de guantes clase 0, protección facial">Uso de kit de guantes clase 0, protección facial</option>
-                  <option value="Gafas de protección">Gafas de protección</option>
-                </select><br><br>
-                <select name="seguridad2">
-                  <option value="">NA</option>
-                  <option value="Comunicacion_Asertiva">Comunicación Asertiva</option>
-                  <option value="Distanciamiento_Perro_Abeja_Serpiente">Distanciamiento (Perros, Abejas, Serpientes)</option>
-                  <option value="Distanciamiento_Usuario_Agresivo">Distanciamiento (Usuario Agresivo)</option>
-                  <option value="Herramientas_Manuales_Buen_Estado">Herramientas Manuales en Buen Estado</option>
-                  <option value="Hidratacion_Agua_Suero">Hidratación (Agua, Suero)</option>
-                  <option value="Planificacion_Desplazamiento">Planificación de Desplazamiento</option>
-                  <option value="Preoperacional_Vehiculo">Preoperacional de Vehículo</option>
-                  <option value="Respeto_Senales_Transito">Respeto de Señales de Tránsito</option>
-                  <option value="Respeto_Hacia_Usuario">Respeto Hacia el Usuario</option>
-                  <option value="Revision_Sistema_Acceso">Revisión de Estado de Sistema de Acceso (Escalera, Pretales)</option>
-                  <option value="Revision_Estructura_Poste">Revisión de Estructura (Poste)</option>
-                  <option value="Ubicacion_Vehiculo_Zona_Segura">Ubicación de Vehículo en Zona Segura</option>
-                  <option value="Uso_Balaclava">Uso de Balaclava</option>
-                  <option value="Uso_Bloqueador_Solar">Uso de Bloqueador Solar</option>
-                  <option value="Uso_Botas_Dielectricas_Antideslizantes">Uso de Botas (Dieléctricas, Antideslizantes)</option>
-                  <option value="Uso_Carne_Identificacion">Uso de Carné de Identificación Visible</option>
-                  <option value="Uso_Casco_Barbuquejo">Uso de Casco con Barbuquejo</option>
-                  <option value="Uso_Cebra_Peatonal">Uso de Cebra Peatonal</option>
-                  <option value="Uso_Cinturon_Seguridad">Uso de Cinturón de Seguridad</option>
-                  <option value="Uso_Conos_Cinta_Senalizacion">Uso de Conos, Cinta de Señalización</option>
-                  <option value="Uso_Detector_Ausencia_Tension">Uso de Detector de Ausencia de Tensión</option>
-                  <option value="Uso_Equipos_Contra_Caidas">Uso de Equipos Contra Caídas (Arnés, Tie off, Eslinga, Mosquetón)</option>
-                  <option value="Uso_Gafas_Proteccion">Uso de Gafas de Protección</option>
-                  <option value="Uso_Guantes_Vaqueta">Uso de Guantes de Vaqueta</option>
-                  <option value="Uso_Kit_Guantes_Clase0">Uso de Kit de Guantes Clase 0</option>
-                  <option value="Uso_Luces_Altas_Bajas_Estacionarias">Uso de Luces Altas, Bajas, Estacionarias, Direccionales</option>
-                  <option value="Uso_Recipiente_Almacenamiento_Residuos">Uso de Recipiente para Almacenamiento de Residuos</option>
-                  <option value="Uso_Recipiente_Disposicion_Final">Uso de Recipiente para Residuos Disposición Final</option>
-                  <option value="Uso_Repelente">Uso de Repelente</option>
-                  <option value="Uso_Ropa_Operativa">Uso de Ropa Operativa</option>
-                  <option value="Velocidad_Moderada">Velocidad Moderada</option>
-                </select><br><br>
-                <select name="seguridad3">
-                  <option value="">NA</option>
-                  <option value="Comunicacion_Asertiva">Comunicación Asertiva</option>
-                  <option value="Distanciamiento_Perro_Abeja_Serpiente">Distanciamiento (Perros, Abejas, Serpientes)</option>
-                  <option value="Distanciamiento_Usuario_Agresivo">Distanciamiento (Usuario Agresivo)</option>
-                  <option value="Herramientas_Manuales_Buen_Estado">Herramientas Manuales en Buen Estado</option>
-                  <option value="Hidratacion_Agua_Suero">Hidratación (Agua, Suero)</option>
-                  <option value="Planificacion_Desplazamiento">Planificación de Desplazamiento</option>
-                  <option value="Preoperacional_Vehiculo">Preoperacional de Vehículo</option>
-                  <option value="Respeto_Senales_Transito">Respeto de Señales de Tránsito</option>
-                  <option value="Respeto_Hacia_Usuario">Respeto Hacia el Usuario</option>
-                  <option value="Revision_Sistema_Acceso">Revisión de Estado de Sistema de Acceso (Escalera, Pretales)</option>
-                  <option value="Revision_Estructura_Poste">Revisión de Estructura (Poste)</option>
-                  <option value="Ubicacion_Vehiculo_Zona_Segura">Ubicación de Vehículo en Zona Segura</option>
-                  <option value="Uso_Balaclava">Uso de Balaclava</option>
-                  <option value="Uso_Bloqueador_Solar">Uso de Bloqueador Solar</option>
-                  <option value="Uso_Botas_Dielectricas_Antideslizantes">Uso de Botas (Dieléctricas, Antideslizantes)</option>
-                  <option value="Uso_Carne_Identificacion">Uso de Carné de Identificación Visible</option>
-                  <option value="Uso_Casco_Barbuquejo">Uso de Casco con Barbuquejo</option>
-                  <option value="Uso_Cebra_Peatonal">Uso de Cebra Peatonal</option>
-                  <option value="Uso_Cinturon_Seguridad">Uso de Cinturón de Seguridad</option>
-                  <option value="Uso_Conos_Cinta_Senalizacion">Uso de Conos, Cinta de Señalización</option>
-                  <option value="Uso_Detector_Ausencia_Tension">Uso de Detector de Ausencia de Tensión</option>
-                  <option value="Uso_Equipos_Contra_Caidas">Uso de Equipos Contra Caídas (Arnés, Tie off, Eslinga, Mosquetón)</option>
-                  <option value="Uso_Gafas_Proteccion">Uso de Gafas de Protección</option>
-                  <option value="Uso_Guantes_Vaqueta">Uso de Guantes de Vaqueta</option>
-                  <option value="Uso_Kit_Guantes_Clase0">Uso de Kit de Guantes Clase 0</option>
-                  <option value="Uso_Luces_Altas_Bajas_Estacionarias">Uso de Luces Altas, Bajas, Estacionarias, Direccionales</option>
-                  <option value="Uso_Recipiente_Almacenamiento_Residuos">Uso de Recipiente para Almacenamiento de Residuos</option>
-                  <option value="Uso_Recipiente_Disposicion_Final">Uso de Recipiente para Residuos Disposición Final</option>
-                  <option value="Uso_Repelente">Uso de Repelente</option>
-                  <option value="Uso_Ropa_Operativa">Uso de Ropa Operativa</option>
-                  <option value="Velocidad_Moderada">Velocidad Moderada</option>
-                </select><br><br>
-                </div>
-                &nbsp; &nbsp; Otra Barrera de Seguridad: <input type="text" name="b_control[]">
-              </label><br><br>
-              <label>Barreras de Soporte:<br><br>
-                <div class="row">
-                <select name="soporte1">
-                  <option value="">NA</option>
-                  <option value="Capacitacion_Autocuidado">Capacitación en Autocuidado</option>
-                  <option value="Capacitacion_Brigadas_Emergencia">Capacitación en Brigadas de Emergencia</option>
-                  <option value="Capacitacion_Caidas_Diferente_Nivel">Capacitación en Caídas a Diferente Nivel</option>
-                  <option value="Capacitacion_Caidas_Mismo_Nivel">Capacitación en Caídas al Mismo Nivel</option>
-                  <option value="Capacitacion_Inspeccion_Verificacion_Elementos_Trabajo">Capacitación en Inspección y Verificación de Elementos de Trabajo</option>
-                  <option value="Capacitacion_Manejo_Equipos_Medida">Capacitación en Manejo de Equipos de Medida Directa y Semidirecta</option>
-                  <option value="Capacitacion_Manejo_Residuos_Solidos">Capacitación en Manejo de Residuos Sólidos</option>
-                  <option value="Capacitacion_Manejo_Defensivo">Capacitación en Manejo Defensivo</option>
-                  <option value="Capacitacion_Medio_Ambiente">Capacitación en Medio Ambiente</option>
-                  <option value="Capacitacion_Mordedura_Canina">Capacitación en Mordedura Canina</option>
-                  <option value="Capacitacion_Normas_Transito">Capacitación en Normas de Tránsito</option>
-                  <option value="Capacitacion_Pausas_Activas">Capacitación en Pausas Activas</option>
-                  <option value="Capacitacion_Primeros_Auxilios">Capacitación en Primeros Auxilios</option>
-                  <option value="Capacitacion_Riesgo_Biologico">Capacitación en Riesgo Biológico</option>
-                  <option value="Capacitacion_Riesgo_Biomecanico">Capacitación en Riesgo Biomecánico</option>
-                  <option value="Capacitacion_Riesgo_Electrico">Capacitación en Riesgo Eléctrico</option>
-                  <option value="Capacitacion_Riesgo_Ergonomico">Capacitación en Riesgo Ergonómico</option>
-                  <option value="Capacitacion_Riesgo_Mecanico">Capacitación en Riesgo Mecánico</option>
-                  <option value="Capacitacion_Riesgo_Psicosocial_Comunicacion_Asertiva">Capacitación en Riesgo Psicosocial y Comunicación Asertiva</option>
-                  <option value="Capacitacion_Riesgo_Publico">Capacitación en Riesgo Público</option>
-                  <option value="Capacitacion_Seguridad_Vial">Capacitación en Seguridad Vial</option>
-                  <option value="Capacitacion_Trabajo_Alturas">Capacitación en Trabajo en Alturas</option>
-                </select><br><br>
-                <select name="soporte2">
-                  <option value="">NA</option>
-                  <option value="Capacitacion_Autocuidado">Capacitación en Autocuidado</option>
-                  <option value="Capacitacion_Brigadas_Emergencia">Capacitación en Brigadas de Emergencia</option>
-                  <option value="Capacitacion_Caidas_Diferente_Nivel">Capacitación en Caídas a Diferente Nivel</option>
-                  <option value="Capacitacion_Caidas_Mismo_Nivel">Capacitación en Caídas al Mismo Nivel</option>
-                  <option value="Capacitacion_Inspeccion_Verificacion_Elementos_Trabajo">Capacitación en Inspección y Verificación de Elementos de Trabajo</option>
-                  <option value="Capacitacion_Manejo_Equipos_Medida">Capacitación en Manejo de Equipos de Medida Directa y Semidirecta</option>
-                  <option value="Capacitacion_Manejo_Residuos_Solidos">Capacitación en Manejo de Residuos Sólidos</option>
-                  <option value="Capacitacion_Manejo_Defensivo">Capacitación en Manejo Defensivo</option>
-                  <option value="Capacitacion_Medio_Ambiente">Capacitación en Medio Ambiente</option>
-                  <option value="Capacitacion_Mordedura_Canina">Capacitación en Mordedura Canina</option>
-                  <option value="Capacitacion_Normas_Transito">Capacitación en Normas de Tránsito</option>
-                  <option value="Capacitacion_Pausas_Activas">Capacitación en Pausas Activas</option>
-                  <option value="Capacitacion_Primeros_Auxilios">Capacitación en Primeros Auxilios</option>
-                  <option value="Capacitacion_Riesgo_Biologico">Capacitación en Riesgo Biológico</option>
-                  <option value="Capacitacion_Riesgo_Biomecanico">Capacitación en Riesgo Biomecánico</option>
-                  <option value="Capacitacion_Riesgo_Electrico">Capacitación en Riesgo Eléctrico</option>
-                  <option value="Capacitacion_Riesgo_Ergonomico">Capacitación en Riesgo Ergonómico</option>
-                  <option value="Capacitacion_Riesgo_Mecanico">Capacitación en Riesgo Mecánico</option>
-                  <option value="Capacitacion_Riesgo_Psicosocial_Comunicacion_Asertiva">Capacitación en Riesgo Psicosocial y Comunicación Asertiva</option>
-                  <option value="Capacitacion_Riesgo_Publico">Capacitación en Riesgo Público</option>
-                  <option value="Capacitacion_Seguridad_Vial">Capacitación en Seguridad Vial</option>
-                  <option value="Capacitacion_Trabajo_Alturas">Capacitación en Trabajo en Alturas</option>
-                </select><br><br>
-                <select name="soporte3">
-                  <option value="">NA</option>
-                  <option value="Capacitacion_Autocuidado">Capacitación en Autocuidado</option>
-                  <option value="Capacitacion_Brigadas_Emergencia">Capacitación en Brigadas de Emergencia</option>
-                  <option value="Capacitacion_Caidas_Diferente_Nivel">Capacitación en Caídas a Diferente Nivel</option>
-                  <option value="Capacitacion_Caidas_Mismo_Nivel">Capacitación en Caídas al Mismo Nivel</option>
-                  <option value="Capacitacion_Inspeccion_Verificacion_Elementos_Trabajo">Capacitación en Inspección y Verificación de Elementos de Trabajo</option>
-                  <option value="Capacitacion_Manejo_Equipos_Medida">Capacitación en Manejo de Equipos de Medida Directa y Semidirecta</option>
-                  <option value="Capacitacion_Manejo_Residuos_Solidos">Capacitación en Manejo de Residuos Sólidos</option>
-                  <option value="Capacitacion_Manejo_Defensivo">Capacitación en Manejo Defensivo</option>
-                  <option value="Capacitacion_Medio_Ambiente">Capacitación en Medio Ambiente</option>
-                  <option value="Capacitacion_Mordedura_Canina">Capacitación en Mordedura Canina</option>
-                  <option value="Capacitacion_Normas_Transito">Capacitación en Normas de Tránsito</option>
-                  <option value="Capacitacion_Pausas_Activas">Capacitación en Pausas Activas</option>
-                  <option value="Capacitacion_Primeros_Auxilios">Capacitación en Primeros Auxilios</option>
-                  <option value="Capacitacion_Riesgo_Biologico">Capacitación en Riesgo Biológico</option>
-                  <option value="Capacitacion_Riesgo_Biomecanico">Capacitación en Riesgo Biomecánico</option>
-                  <option value="Capacitacion_Riesgo_Electrico">Capacitación en Riesgo Eléctrico</option>
-                  <option value="Capacitacion_Riesgo_Ergonomico">Capacitación en Riesgo Ergonómico</option>
-                  <option value="Capacitacion_Riesgo_Mecanico">Capacitación en Riesgo Mecánico</option>
-                  <option value="Capacitacion_Riesgo_Psicosocial_Comunicacion_Asertiva">Capacitación en Riesgo Psicosocial y Comunicación Asertiva</option>
-                  <option value="Capacitacion_Riesgo_Publico">Capacitación en Riesgo Público</option>
-                  <option value="Capacitacion_Seguridad_Vial">Capacitación en Seguridad Vial</option>
-                  <option value="Capacitacion_Trabajo_Alturas">Capacitación en Trabajo en Alturas</option>
-                </select><br><br>
-                </div>
-                &nbsp; &nbsp; Otra Barrera de Soporte: <input type="text" name="b_control[]">
-              </label>
-          </fieldset><br>
-          <button type="button" onclick="eliminarFirma(this)">Quitar</button>
-          <hr>
-        </div>
-      </div>
-      <button type="button" onclick="agregarFirma(this)">Agregar</button><br><br>
-      </fieldset><br>
-      <fieldset>
-      <p>SI SE LLEGASE A PRESENTAR UNA EMERGENCIA DE SEGURIDAD O AMBIENTE EN SITIO IDENTIFIQUE EL ENCARGADO DE:</p><br>
-      <label>Primeros Auxilios: <input type="text" name="auxilios[]"></label><br>
-      <label>Rescate y Camillaje: <input type="text" name="rescate[]"></label><br>
-      <label>Prevención y Control de Incendios y/o Derrames: <input type="text" name="prevencion[]"></label>
-      </fieldset>
-      </fieldset><br>
-
-      <!-- EQUIPO QUE PARTICIPA, ANALIZA Y DIFUNDE LA IDENTIFICACION DE LOS RIESGOS DE SEGURIDAD Y AMBIENTE -->
-      <fieldset>
-      <legend>10. EQUIPO QUE PARTICIPA, ANALIZA Y DIFUNDE LA IDENTIFICACION DE LOS RIESGOS DE SEGURIDAD Y AMBIENTE</legend>
-      <p>Esta sección debe ser diligenciado en el sitio trabajo y firmado por el personal autorizado para esta labor.</p><br>
-      <fieldset>
-        <div class="firma-container">
-          <div class="firma-entry">
-            <label>Cargo: <input type="text" name="cargo[]" disabled></label><br>
-            <label>Nombres: <input type="text" name="nombres[]" disabled></label><br>
-            <label>Firma: <input type="text" name="firma[]" disabled></label><br>
-            <a href="login.html">Firmar</a>
-            <button type="button" onclick="eliminarFirma(this)">Quitar</button>
-            <hr>
+        <!-- 1. CONDICIONES GENERALES -->
+        <fieldset>
+          <legend>1. CONDICIONES GENERALES</legend>
+          <div class="row">
+            <label>Fecha: <input type="date" name="fecha" /></label>
+            <label>Hora: <input type="time" name="hora" /></label>
+            <label>Ciudad: <input type="text" name="ciudad" /></label>
+            <label>Actividad a Realizar:
+              <select name="actividad_general">
+                <option value="Revisión e Instalación de Equipos de Medida Directa">Revisión e Instalación de Equipos de Medida Directa</option>
+                <option value="Verificación de Amarres">Verificación de Amarres</option>
+                <option value="Primera Lectura">Primera Lectura</option>
+                <option value="Segunda Lectura">Segunda Lectura</option>
+                <option value="Lectura de Macromedidas">Lectura de Macromedidas</option>
+                <option value="Revisión de Fronteras">Revisión de Fronteras</option>
+                <option value="Censo Alumbrado Navideño">Censo Alumbrado Navideño</option>
+                <option value="Alumbrado Público">Alumbrado Público</option>
+                <option value="Normalización">Normalización</option>
+                <option value="Instalación de Macromedidas">Instalación de Macromedidas</option>
+              </select>
+            </label>
+            <label>Número de Evento u Orden de Trabajo: <input type="text" name="numero_evento" /></label>
+            <label>Municipio donde se realiza: <input type="text" name="municipio" /></label>
+            <label>Barrio/Vereda: <input type="text" name="barrio_vereda" /></label>
           </div>
-        </div>
-        <button type="button" onclick="agregarFirma(this)">Agregar</button>
-      </fieldset><br>
-      <label>Hora Finalización Actividad: <input type="time" name="hora_fin"></label>
-      </fieldset><br>
+          <p class="muted">De acuerdo a la actividad a realizar, se debe cumplir con la información solicitada; de lo contrario debe verificarse para poder continuar.</p>
+        </fieldset>
 
-      <input type="submit" value="Guardar">
+        <!-- 2. IDENTIFIQUE EL PROCESO -->
+        <fieldset>
+          <legend>2. IDENTIFIQUE EL PROCESO AL CUAL PERTENECE LA ACTIVIDAD A DESARROLLAR</legend>
+          <div class="row">
+            <label>Proceso de Generación
+              <select name="proc_generacion">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>Proceso de Distribución - Energizadas
+              <select name="proc_dist_energ">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>Proceso de Distribución - Desenergizadas
+              <select name="proc_dist_desenerg">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>Proceso de Transmisión
+              <select name="proc_transmision">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>Proceso Comercial
+              <select name="proc_comercial">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>Área Almacén
+              <select name="proc_almacen">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+          </div>
+          <div class="note" style="margin-top:8px">Otro: <strong>Proyecto PERPE</strong></div>
+          <p class="muted">Este análisis es para actividades consideradas como <strong>críticas</strong> o donde se involucren tareas como trabajo en alturas, exposición a energía eléctrica, transporte en vehículos o motocicletas, entre otros.</p>
+        </fieldset>
 
-      <script>
-        function agregarFirma(button) {
-          const container = button.closest('fieldset').querySelector('.firma-container');
-          if (!container) {
-            alert('No se encontró un contenedor de firmas.');
-            return;
-          }
+        <!-- 3. UBICACIÓN DE LOS CIRCUITOS Y EQUIPOS A INTERVENIR -->
+        <fieldset>
+          <legend>3. UBICACIÓN DE LOS CIRCUITOS Y EQUIPOS A INTERVENIR</legend>
+          <p class="muted">Solo aplica cuando se intervienen redes o equipos eléctricos.</p>
+          <div class="row">
+            <label>Subestación: <input type="text" name="subestacion" /></label>
+            <label>Circuito: <input type="text" name="circuito" /></label>
+            <label>Nodo Transformador: <input type="text" name="nodo_transformador" /></label>
+            <label>Nivel de Tensión: <input type="text" name="nivel_tension" /></label>
+            <label>Número de Cuentas: <input type="text" name="numero_cuentas" /></label>
+          </div>
+          <div class="actions"><button type="button" class="secondary" onclick="alert('Aquí se integraría la carga del diagrama del circuito.')">Cargar el Diagrama del Circuito</button></div>
+        </fieldset>
 
-          const entradaOriginal = container.querySelector('.firma-entry');
-          if (!entradaOriginal) {
-            alert('No se encontró una entrada de firma para clonar.');
-            return;
-          }
+        <!-- 4. CERTIFICACIÓN DE INFORMACIÓN PRELIMINAR -->
+        <fieldset>
+          <legend>4. CERTIFICACIÓN DE INFORMACIÓN PRELIMINAR</legend>
+          <div class="row">
+            <label>¿Se definió y suministró la cantidad de material, herramientas y equipos de seguridad críticos para el desarrollo del trabajo?
+              <select name="cert_mat_herr_seg">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>¿Se definió, alistó, revisó y verificó el EPP y protección contra caídas necesario?
+              <select name="cert_epp">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>¿Para las condiciones del trabajo es suficiente el personal asignado?
+              <select name="cert_personal_suf">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>¿Todos los integrantes están enterados del trabajo programado y sus riesgos?
+              <select name="cert_difusion">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>¿El vehículo o motocicleta cuenta con la planilla de alistamiento correctamente diligenciada?
+              <select name="cert_planilla_veh">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>¿Se cuenta con permisos ambientales para realizar la actividad?
+              <select name="cert_perm_amb">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>¿Se cuenta con elementos para manejo de contingencias ambientales?
+              <select name="cert_conting">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>¿Se cuenta con contenedores y bolsas para el manejo de residuos?
+              <select name="cert_residuos">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+            <label>¿Se dispone de elementos o equipo básico para primeros auxilios?
+              <select name="cert_pa">
+                <option value="">NA</option><option>SI</option><option>NO</option>
+              </select>
+            </label>
+          </div>
+          <div class="row">
+            <label>ARL:
+              <select name="cert_arl"><option value="">NA</option><option>SI</option><option>NO</option></select>
+            </label>
+            <label>Pensión:
+              <select name="cert_pension"><option value="">NA</option><option>SI</option><option>NO</option></select>
+            </label>
+            <label>Salud:
+              <select name="cert_salud"><option value="">NA</option><option>SI</option><option>NO</option></select>
+            </label>
+          </div>
+          <div class="note">En caso de emergencia médica o ambiental comunicarse a: <strong>3228126264</strong> • <strong>#888</strong></div>
+          <p class="muted">Si es requisito para la tarea y NO se tiene, el grupo de trabajo no puede salir y debe reportarse al Jefe Inmediato.</p>
+        </fieldset>
 
-          const nuevaEntrada = entradaOriginal.cloneNode(true);
+        <!-- 5. RUTOGRAMA -->
+        <fieldset>
+          <legend>5. RUTOGRAMA</legend>
+          <p class="muted">Identifique el origen, destino, la ruta y condiciones de riesgo para la actividad.</p>
+          <div class="actions"><button type="button" onclick="location.href='rutograma.html'">Cargar el Rutograma</button></div>
+        </fieldset>
 
-          nuevaEntrada.querySelectorAll('input, select, textarea').forEach(element => {
-            if (element.type === 'checkbox' || element.type === 'radio') {
-              element.checked = false;
-            } else {
-              element.value = '';
-            }
-          });
-
-          container.appendChild(nuevaEntrada);
-        }
-
-        function eliminarFirma(button) {
-          const entryToRemove = button.closest('.firma-entry');
-          const container = entryToRemove.closest('.firma-container');
-          const totalEntradas = container.querySelectorAll('.firma-entry').length;
-
-          if (totalEntradas > 1) {
-            container.removeChild(entryToRemove);
-          } else {
-            alert('Debe haber al menos una entrada de firma.');
-          }
-        }
-      </script>
-
-    </form>
-  </fieldset>
+        <!-- 6. FUNCIONARIOS AUTORIZADOS PARA REALIZAR LA LABOR -->
+        <fieldset>
+          <legend>6. FUNCIONARIOS AUTORIZADOS PARA REALIZAR LA LABOR</legend>
+          <p class="muted">Diligenciar antes de salir de la sede y firmar por los participantes.</p>
+          <div class="repeater" data-group="firmas6" data-min="1">
+            <div class="repeat-items">
+              <div class="repeat-item">
+                <div class="row">
+                  <label>Nombres: <input type="text" name="aut_nombres[]" disabled></label>
+                  <label>Firma: <input type="text" name="aut_firma[]" disabled></label>
                 </div>
+                <div class="actions">
+                  <a class="link" href="login.html">Firmar</a>
+                  <button type="button" class="secondary" data-action="remove">Quitar</button>
+                </div>
+              </div>
             </div>
-        </div>
+            <div class="actions"><button type="button" data-action="add">Agregar</button></div>
+          </div>
+          <p class="muted">Si antes de salir se realiza una actividad con <strong>riesgo alto</strong>, diligencie la sección 8.</p>
+        </fieldset>
+
+        <!-- 7. PLANIFICACIÓN DIARIA DE SEGURIDAD Y AMBIENTE -->
+        <fieldset>
+          <legend>7. PLANIFICACIÓN DIARIA DE SEGURIDAD Y AMBIENTE</legend>
+          <p class="muted">Diligenciar en el sitio de trabajo y firmar por el personal autorizado.</p>
+          <div class="row">
+            <label>Actividad a Realizar:
+              <select name="actividad_sitio">
+                <option value="Revisión e Instalación de Equipos de Medida Directa">Revisión e Instalación de Equipos de Medida Directa</option>
+                <option value="Verificación de Amarres">Verificación de Amarres</option>
+                <option value="Primera Lectura">Primera Lectura</option>
+                <option value="Segunda Lectura">Segunda Lectura</option>
+                <option value="Lectura de Macromedidas">Lectura de Macromedidas</option>
+                <option value="Revisión de Fronteras">Revisión de Fronteras</option>
+                <option value="Censo Alumbrado Navideño">Censo Alumbrado Navideño</option>
+                <option value="Alumbrado Público">Alumbrado Público</option>
+                <option value="Normalización">Normalización</option>
+                <option value="Instalación de Macromedidas">Instalación de Macromedidas</option>
+              </select>
+            </label>
+            <label>Hora: <input type="time" name="hora2" /></label>
+          </div>
+
+          <fieldset>
+            <p>Si la actividad se considera trabajo en alturas, confirme:</p>
+            <div class="row">
+              <label>¿Cuentan con certificación para trabajo seguro en alturas?
+                <select name="cert_alturas">
+                  <option value="">NA</option><option>SI</option><option>NO</option>
+                </select>
+              </label>
+              <label>Altura aproximada (m): <input type="text" name="altura_aprox" /></label>
+              <label>Zona:
+                <select name="zona_trabajo">
+                  <option value="">NA</option><option value="URBANO">Urbano</option><option value="RURAL">Rural</option>
+                </select>
+              </label>
+            </div>
+            <fieldset>
+              <p>Sistema de acceso a utilizar:</p>
+              <div class="row">
+                <label>Grúa con Canasta
+                  <select name="acceso_grua"><option value="">NA</option><option>SI</option><option>NO</option></select>
+                </label>
+                <label>Escalera Dieléctrica
+                  <select name="acceso_escalera"><option value="">NA</option><option>SI</option><option>NO</option></select>
+                </label>
+                <label>Pretales
+                  <select name="acceso_pretales"><option value="">NA</option><option>SI</option><option>NO</option></select>
+                </label>
+                <label>Otro: <input type="text" name="acceso_otro" /></label>
+              </div>
+            </fieldset>
+            <p class="note">IMPORTANTE: Si la actividad es en alturas (≥ 1,5 m) y no hay al menos 2 trabajadores certificados con sus equipos completos, <strong>absténgase</strong> de realizar el trabajo y reporte al jefe inmediato.</p>
+          </fieldset>
+        </fieldset>
+
+        <!-- 8. ANÁLISIS DEL RIESGO SEGURIDAD Y AMBIENTE -->
+        <fieldset>
+          <legend>8. ANÁLISIS DEL RIESGO – Seguridad y Ambiente</legend>
+
+          <!-- 8A. BARRERAS A IMPLEMENTAR: bloque replicable -->
+          <fieldset>
+            <legend>BARRERAS A IMPLEMENTAR</legend>
+
+            <div class="repeater" data-group="analisis8a" data-min="1">
+              <div class="repeat-items">
+                <div class="repeat-item">
+
+                  <!-- PASO A PASO (tres selects fijos) -->
+                  <label class="muted">Paso a Paso de la Actividad</label>
+                  <div class="row">
+                    <label>
+                      <span>Seleccione el paso</span>
+                      <select name="paso[]">
+                        <option value="">NA</option>
+                        <option>1. Planeación de Actividad. Alistamiento de Herramienta y Vehículo</option>
+                        <option>2. Desplazamiento en Vehículo. De Oficina a Sitio de Trabajo</option>
+                        <option>3. Acta de Verificación e Instalación CTA</option>
+                        <option>4. Desplazamiento Peatonal. Verificación Visual</option>
+                        <option>5. Inspección Visual de Área de Trabajo en Cuadrilla. Presentación al Usuario y Señalización Área de Trabajo</option>
+                        <option>6. Revisión a Grupo de Medida. Verificación de Tensión y Retiro de Sellos</option>
+                        <option>7. Desconexión y Aislamiento de Parciales de Carga del Usuario</option>
+                        <option>8. Conexión Carga Resistiva. Pruebas a Medidor y Toma de Datos</option>
+                        <option>8.1. Retiro de Carga Resistiva. Desconexión de Medidor y Aislamieno Puntas</option>
+                        <option>8.2. Montaje y Conexionado de Nuevo Medidor. Pruebas de Funcionamiento</option>
+                        <option>9. Conexión de Parciales de Carga. Restablecimiento de Servicio</option>
+                        <option>10. Sellado de Medidor. Recolección de Residuos Sólidos</option>
+                        <option>11. Ascenso a Estructura o Poste (Pretales)</option>
+                        <option>11.1. Posicionamiento de Escalera en Estructura. Anclaje y Montaje de Línea de Vida</option>
+                        <option>11.2. Ascenso a Estructura. Posicionamiento y Toma de Datos</option>
+                        <option>12. Anclaje y Posicionamiento en Altura. Toma de Datos y Registro Fotográfico</option>
+                        <option>13. Descenso de Estructura o Poste</option>
+                        <option>14. Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina</option>
+                      </select>
+                    </label>
+                    <label>
+                      <span>Seleccione el paso</span>
+                      <select name="paso[]">
+                        <option value="">NA</option>
+                        <option>1. Planeación de Actividad. Alistamiento de Herramienta y Vehículo</option>
+                        <option>2. Desplazamiento en Vehículo. De Oficina a Sitio de Trabajo</option>
+                        <option>3. Acta de Verificación e Instalación CTA</option>
+                        <option>4. Desplazamiento Peatonal. Verificación Visual</option>
+                        <option>5. Inspección Visual de Área de Trabajo en Cuadrilla. Presentación al Usuario y Señalización Área de Trabajo</option>
+                        <option>6. Revisión a Grupo de Medida. Verificación de Tensión y Retiro de Sellos</option>
+                        <option>7. Desconexión y Aislamiento de Parciales de Carga del Usuario</option>
+                        <option>8. Conexión Carga Resistiva. Pruebas a Medidor y Toma de Datos</option>
+                        <option>8.1. Retiro de Carga Resistiva. Desconexión de Medidor y Aislamieno Puntas</option>
+                        <option>8.2. Montaje y Conexionado de Nuevo Medidor. Pruebas de Funcionamiento</option>
+                        <option>9. Conexión de Parciales de Carga. Restablecimiento de Servicio</option>
+                        <option>10. Sellado de Medidor. Recolección de Residuos Sólidos</option>
+                        <option>11. Ascenso a Estructura o Poste (Pretales)</option>
+                        <option>11.1. Posicionamiento de Escalera en Estructura. Anclaje y Montaje de Línea de Vida</option>
+                        <option>11.2. Ascenso a Estructura. Posicionamiento y Toma de Datos</option>
+                        <option>12. Anclaje y Posicionamiento en Altura. Toma de Datos y Registro Fotográfico</option>
+                        <option>13. Descenso de Estructura o Poste</option>
+                        <option>14. Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina</option>
+                      </select>
+                    </label>
+                    <label>
+                      <span>Seleccione el paso</span>
+                      <select name="paso[]">
+                        <option value="">NA</option>
+                        <option>1. Planeación de Actividad. Alistamiento de Herramienta y Vehículo</option>
+                        <option>2. Desplazamiento en Vehículo. De Oficina a Sitio de Trabajo</option>
+                        <option>3. Acta de Verificación e Instalación CTA</option>
+                        <option>4. Desplazamiento Peatonal. Verificación Visual</option>
+                        <option>5. Inspección Visual de Área de Trabajo en Cuadrilla. Presentación al Usuario y Señalización Área de Trabajo</option>
+                        <option>6. Revisión a Grupo de Medida. Verificación de Tensión y Retiro de Sellos</option>
+                        <option>7. Desconexión y Aislamiento de Parciales de Carga del Usuario</option>
+                        <option>8. Conexión Carga Resistiva. Pruebas a Medidor y Toma de Datos</option>
+                        <option>8.1. Retiro de Carga Resistiva. Desconexión de Medidor y Aislamieno Puntas</option>
+                        <option>8.2. Montaje y Conexionado de Nuevo Medidor. Pruebas de Funcionamiento</option>
+                        <option>9. Conexión de Parciales de Carga. Restablecimiento de Servicio</option>
+                        <option>10. Sellado de Medidor. Recolección de Residuos Sólidos</option>
+                        <option>11. Ascenso a Estructura o Poste (Pretales)</option>
+                        <option>11.1. Posicionamiento de Escalera en Estructura. Anclaje y Montaje de Línea de Vida</option>
+                        <option>11.2. Ascenso a Estructura. Posicionamiento y Toma de Datos</option>
+                        <option>12. Anclaje y Posicionamiento en Altura. Toma de Datos y Registro Fotográfico</option>
+                        <option>13. Descenso de Estructura o Poste</option>
+                        <option>14. Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina</option>
+                      </select>
+                    </label>
+                  </div>
+                  <label style="margin-top:.5em"><span>Otra Actividad (opcional)</span>
+                    <input type="text" name="paso_otro[]" placeholder="Describa otra actividad" />
+                  </label>
+
+                  <!-- RIESGOS (tres riesgos + tres niveles) -->
+                  <label class="muted" style="margin-top:1em">Riesgo Potencial en Seguridad y Ambiente</label>
+                  <div class="row">
+                    <label>
+                      <span>Riesgo</span>
+                      <select name="riesgo[]">{RIESGO_OPCIONES}</select>
+                    </label>
+                    <label>
+                      <span>Nivel</span>
+                      <select name="riesgo_nivel[]"><option value="">NA</option><option value="A">A</option><option value="M">M</option></select>
+                    </label>
+                    <label>
+                      <span>Riesgo</span>
+                      <select name="riesgo[]">{RIESGO_OPCIONES}</select>
+                    </label>
+                    <label>
+                      <span>Nivel</span>
+                      <select name="riesgo_nivel[]"><option value="">NA</option><option value="A">A</option><option value="M">M</option></select>
+                    </label>
+                    <label>
+                      <span>Riesgo</span>
+                      <select name="riesgo[]">{RIESGO_OPCIONES}</select>
+                    </label>
+                    <label>
+                      <span>Nivel</span>
+                      <select name="riesgo_nivel[]"><option value="">NA</option><option value="A">A</option><option value="M">M</option></select>
+                    </label>
+                  </div>
+                  <label style="margin-top:.5em">Otro Riesgo (opcional): <input type="text" name="riesgo_otro[]" placeholder="Describa otro riesgo" /></label>
+
+                  <!-- BARRERAS DE SEGURIDAD (tres selects) -->
+                  <label class="muted" style="margin-top:1em">Barreras de Seguridad</label>
+                  <div class="row">
+                    <label><span>Seleccione</span><select name="barrera_seguridad[]">{SEGURIDAD_OPCIONES}</select></label>
+                    <label><span>Seleccione</span><select name="barrera_seguridad[]">{SEGURIDAD_OPCIONES}</select></label>
+                    <label><span>Seleccione</span><select name="barrera_seguridad[]">{SEGURIDAD_OPCIONES}</select></label>
+                  </div>
+                  <label style="margin-top:.5em">Otra (opcional): <input type="text" name="barrera_seguridad_otro[]" placeholder="Describa otra barrera" /></label>
+
+                  <!-- BARRERAS DE SOPORTE (tres selects) -->
+                  <label class="muted" style="margin-top:1em">Barreras de Soporte</label>
+                  <div class="row">
+                    <label><span>Seleccione</span><select name="barrera_soporte[]">{SOPORTE_OPCIONES}</select></label>
+                    <label><span>Seleccione</span><select name="barrera_soporte[]">{SOPORTE_OPCIONES}</select></label>
+                    <label><span>Seleccione</span><select name="barrera_soporte[]">{SOPORTE_OPCIONES}</select></label>
+                  </div>
+                  <label style="margin-top:.5em">Otra (opcional): <input type="text" name="barrera_soporte_otro[]" placeholder="Describa otra barrera" /></label>
+
+                  <div class="actions" style="margin-top:8px"><button type="button" class="secondary" data-action="remove">Quitar bloque</button></div>
+                </div>
+              </div>
+              <div class="actions"><button type="button" data-action="add">Agregar bloque</button></div>
+            </div>
+          </fieldset>
+
+          <!-- 8B. ROLES EN EMERGENCIA -->
+          <fieldset>
+            <p>Si se presenta una emergencia de seguridad o ambiente en sitio, identifique el encargado de:</p>
+            <div class="row">
+              <label>Primeros Auxilios: <input type="text" name="enc_pa[]" /></label>
+              <label>Rescate y Camillaje: <input type="text" name="enc_rescate[]" /></label>
+              <label>Prevención y Control de Incendios y/o Derrames: <input type="text" name="enc_prevencion[]" /></label>
+            </div>
+          </fieldset>
+        </fieldset>
+
+        <!-- 10. EQUIPO QUE PARTICIPA... -->
+        <fieldset>
+          <legend>10. EQUIPO QUE PARTICIPA, ANALIZA Y DIFUNDE LA IDENTIFICACIÓN DE RIESGOS</legend>
+          <p class="muted">Diligenciar en el sitio de trabajo y firmar por el personal autorizado.</p>
+          <div class="repeater" data-group="equipo10" data-min="1">
+            <div class="repeat-items">
+              <div class="repeat-item">
+                <div class="row">
+                  <label>Cargo: <input type="text" name="eq_cargo[]" disabled></label>
+                  <label>Nombres: <input type="text" name="eq_nombres[]" disabled></label>
+                  <label>Firma: <input type="text" name="eq_firma[]" disabled></label>
+                </div>
+                <div class="actions">
+                  <a class="link" href="login.html">Firmar</a>
+                  <button type="button" class="secondary" data-action="remove">Quitar</button>
+                </div>
+              </div>
+            </div>
+            <div class="actions"><button type="button" data-action="add">Agregar</button></div>
+          </div>
+          <label>Hora Finalización Actividad: <input type="time" name="hora_fin" /></label>
+        </fieldset>
+
+        <div class="actions"><input type="submit" value="Guardar" /></div>
+
+      </form>
+    </fieldset>
+  </div>
+
+  <!-- TEMPLATES (uno por grupo) -->
+  <template id="tpl-firmas6">
+    <div class="repeat-item">
+      <div class="row">
+        <label>Nombres: <input type="text" name="aut_nombres[]" disabled></label>
+        <label>Firma: <input type="text" name="aut_firma[]" disabled></label>
+      </div>
+      <div class="actions">
+        <a class="link" href="login.html">Firmar</a>
+        <button type="button" class="secondary" data-action="remove">Quitar</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-pasos">
+    <div class="repeat-item">
+      <div class="inline-2">
+        <label>
+          <span>Seleccione el paso</span>
+          <select name="paso[]">
+            <option value="">NA</option>
+            <option>1. Planeación de Actividad. Alistamiento de Herramienta y Vehículo</option>
+            <option>2. Desplazamiento en Vehículo. De Oficina a Sitio de Trabajo</option>
+            <option>3. Acta de Verificación e Instalación CTA</option>
+            <option>4. Desplazamiento Peatonal. Verificación Visual</option>
+            <option>5. Inspección Visual de Área de Trabajo en Cuadrilla. Presentación al Usuario y Señalización Área de Trabajo</option>
+            <option>6. Revisión a Grupo de Medida. Verificación de Tensión y Retiro de Sellos</option>
+            <option>7. Desconexión y Aislamiento de Parciales de Carga del Usuario</option>
+            <option>8. Conexión Carga Resistiva. Pruebas a Medidor y Toma de Datos</option>
+            <option>8.1. Retiro de Carga Resistiva. Desconexión de Medidor y Aislamieno Puntas</option>
+            <option>8.2. Montaje y Conexionado de Nuevo Medidor. Pruebas de Funcionamiento</option>
+            <option>9. Conexión de Parciales de Carga. Restablecimiento de Servicio</option>
+            <option>10. Sellado de Medidor. Recolección de Residuos Sólidos</option>
+            <option>11. Ascenso a Estructura o Poste (Pretales)</option>
+            <option>11.1. Posicionamiento de Escalera en Estructura. Anclaje y Montaje de Línea de Vida</option>
+            <option>11.2. Ascenso a Estructura. Posicionamiento y Toma de Datos</option>
+            <option>12. Anclaje y Posicionamiento en Altura. Toma de Datos y Registro Fotográfico</option>
+            <option>13. Descenso de Estructura o Poste</option>
+            <option>14. Desplazamiento en Vehículo. De Sitio de Trabajo a Oficina</option>
+          </select>
+        </label>
+        <label>
+          <span>Otra Actividad (opcional)</span>
+          <input type="text" name="paso_otro[]" placeholder="Describa otra actividad" />
+        </label>
+        <div class="actions"><button type="button" class="secondary" data-action="remove">Quitar</button></div>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-riesgos">
+    <div class="repeat-item">
+      <div class="inline">
+        <label>
+          <span>Riesgo</span>
+          <select name="riesgo[]">
+            <option value="">NA</option>
+            <option value="Apatia_o_Desinteres">Apatía o Desinterés</option>
+            <option value="Aplastamiento">Aplastamiento</option>
+            <option value="Arco_Electrico">Arco Eléctrico</option>
+            <option value="Atrapamiento">Atrapamiento</option>
+            <option value="Atropellamiento">Atropellamiento</option>
+            <option value="Caida_Diferente_Nivel">Caída a Diferente Nivel</option>
+            <option value="Caida_Mismo_Nivel">Caída al Mismo Nivel</option>
+            <option value="Caida_Objetos">Caída de Objetos</option>
+            <option value="Choque">Choque</option>
+            <option value="Colision">Colisión</option>
+            <option value="Contacto_Electrico">Contacto Eléctrico</option>
+            <option value="Derrumbe">Derrumbe</option>
+            <option value="Electrocucion">Electrocución</option>
+            <option value="Emision_Gases">Emisión de Gases</option>
+            <option value="Fatiga">Fatiga</option>
+            <option value="Fractura">Fractura</option>
+            <option value="Golpe_Contusion">Golpe o Contusión</option>
+            <option value="Insolacion_Deshidratacion">Insolación o Deshidratación</option>
+            <option value="Laceracion_Corte">Laceración o Corte</option>
+            <option value="Lesion_Columna">Lesión de Columna</option>
+            <option value="Lesion_Articulacion">Lesión en Articulación</option>
+            <option value="Lesion_Tendon_Ligamento">Lesión en Tendón o Ligamento</option>
+            <option value="Lesion_Osteomuscular">Lesión Osteomuscular</option>
+            <option value="Machucon">Machucón</option>
+            <option value="Mala_Postura">Mala Postura</option>
+            <option value="Molestias_Irritacion">Molestias o Irritación</option>
+            <option value="Mordedura_Canina">Mordedura Canina</option>
+            <option value="Mordedura_Serpiente">Mordedura de Serpiente</option>
+            <option value="Muerte">Muerte</option>
+            <option value="Orden_Publico">Orden Público</option>
+            <option value="Picadura_Abeja">Picadura de Abeja</option>
+            <option value="Picadura_Insecto">Picadura de Insecto</option>
+            <option value="Quemadura_Segundo_Grado">Quemadura de Segundo Grado</option>
+            <option value="Quemadura_Tercer_Grado">Quemadura de Tercer Grado</option>
+            <option value="Quemadura_Riesgo_Electrico">Quemadura por Riesgo Eléctrico</option>
+            <option value="Quemadura_Solar">Quemadura Solar</option>
+            <option value="Raspon_Abrasion">Raspón o Abrasión</option>
+            <option value="Riesgo_Psicosocial">Riesgo Psicosocial</option>
+            <option value="Robo_Atraco">Robo o Atraco</option>
+            <option value="Trauma_Craneoencefalico">Trauma Craneoencefálico</option>
+            <option value="Tropezon">Tropezón</option>
+            <option value="Usuario_Conflictivo">Usuario Conflictivo</option>
+            <option value="Volcamiento">Volcamiento</option>
+          </select>
+        </label>
+        <label>
+          <span>Nivel</span>
+          <select name="riesgo_nivel[]">
+            <option value="">NA</option>
+            <option value="A">A</option>
+            <option value="M">M</option>
+          </select>
+        </label>
+        <div class="actions"><button type="button" class="secondary" data-action="remove">Quitar</button></div>
+      </div>
+      <label style="margin-top:.5em">Otro Riesgo (opcional): <input type="text" name="riesgo_otro[]" placeholder="Describa otro riesgo" /></label>
+    </div>
+  </template>
+
+  <template id="tpl-seguridad">
+    <div class="repeat-item">
+      <div class="inline-2">
+        <label>
+          <span>Seleccione</span>
+          <select name="barrera_seguridad[]">
+            <option value="">NA</option>
+            <option>Ropa Operativa</option>
+            <option>Botas dieléctricas y antideslizantes</option>
+            <option>Guantes de vaqueta</option>
+            <option>Vista panorámica</option>
+            <option>Uso de cinturón de seguridad</option>
+            <option>Uso de luces altas bajas, estacionarias, direccionales</option>
+            <option>Velocidad moderada</option>
+            <option>Respeto de señales de tránsito</option>
+            <option>Preoperacional de vehículo</option>
+            <option>Planificación de desplazamiento</option>
+            <option>Casco, balaclava, guantes de vaqueta</option>
+            <option>Bloqueador solar</option>
+            <option>Repelente</option>
+            <option>Distanciamiento (perros, abejas y serpientes)</option>
+            <option>Usar cebra peatonal</option>
+            <option>Hidratación con agua o suero</option>
+            <option>Distanciamiento (usuario agresivo)</option>
+            <option>Comunicación asertiva</option>
+            <option>Ubicación de vehículo en zona segura</option>
+            <option>Uso visible de carné de identificación</option>
+            <option>Conos y cinta de señalización</option>
+            <option>Respeto hacia el usuario</option>
+            <option>Uso de kit de guantes clase 0, pantalla protección facial</option>
+            <option>Detector de ausencia de tensión</option>
+            <option>Casco con barbuquejo</option>
+            <option>Recipiente para almacenamiento de residuos</option>
+            <option>Herramientas manuales en buen estado</option>
+            <option>Recipiente para residuos disposición final</option>
+            <option>Gafas de seguridad</option>
+            <option>Contenedor de residuos</option>
+            <option>Revisión de estructura (Poste)</option>
+            <option>Revisión de estado de sistema de acceso (Escalera, Pretales)</option>
+            <option>Revisión de equipos contra caídas (Tie off, Eslinga, Mosquetón)</option>
+            <option>Gafas de protección</option>
+          </select>
+        </label>
+        <label>
+          <span>Otra (opcional)</span>
+          <input type="text" name="barrera_seguridad_otro[]" placeholder="Describa otra barrera" />
+        </label>
+        <div class="actions"><button type="button" class="secondary" data-action="remove">Quitar</button></div>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-soporte">
+    <div class="repeat-item">
+      <div class="inline-2">
+        <label>
+          <span>Seleccione</span>
+          <select name="barrera_soporte[]">
+            <option value="">NA</option>
+            <option>Capacitación en Autocuidado</option>
+            <option>Capacitación en Brigadas de Emergencia</option>
+            <option>Capacitación en Caídas a Diferente Nivel</option>
+            <option>Capacitación en Caídas al Mismo Nivel</option>
+            <option>Capacitación en Inspección y Verificación de Elementos de Trabajo</option>
+            <option>Capacitación en Manejo de Equipos de Medida Directa y Semidirecta</option>
+            <option>Capacitación en Manejo de Residuos Sólidos</option>
+            <option>Capacitación en Manejo Defensivo</option>
+            <option>Capacitación en Medio Ambiente</option>
+            <option>Capacitación en Mordedura Canina</option>
+            <option>Capacitación en Normas de Tránsito</option>
+            <option>Capacitación en Pausas Activas</option>
+            <option>Capacitación en Primeros Auxilios</option>
+            <option>Capacitación en Riesgo Biológico</option>
+            <option>Capacitación en Riesgo Biomecánico</option>
+            <option>Capacitación en Riesgo Eléctrico</option>
+            <option>Capacitación en Riesgo Ergonómico</option>
+            <option>Capacitación en Riesgo Mecánico</option>
+            <option>Capacitación en Riesgo Psicosocial y Comunicación Asertiva</option>
+            <option>Capacitación en Riesgo Público</option>
+            <option>Capacitación en Seguridad Vial</option>
+            <option>Capacitación en Trabajo en Alturas</option>
+          </select>
+        </label>
+        <label>
+          <span>Otra (opcional)</span>
+          <input type="text" name="barrera_soporte_otro[]" placeholder="Describa otra barrera" />
+        </label>
+        <div class="actions"><button type="button" class="secondary" data-action="remove">Quitar</button></div>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-equipo10">
+    <div class="repeat-item">
+      <div class="row">
+        <label>Cargo: <input type="text" name="eq_cargo[]" disabled></label>
+        <label>Nombres: <input type="text" name="eq_nombres[]" disabled></label>
+        <label>Firma: <input type="text" name="eq_firma[]" disabled></label>
+      </div>
+      <div class="actions">
+        <a class="link" href="login.html">Firmar</a>
+        <button type="button" class="secondary" data-action="remove">Quitar</button>
+      </div>
+    </div>
+  </template>
+
+  <!-- Template bloque replicable 8A -->
+  <template id="tpl-analisis8a">
+    <div class="repeat-item">
+      <!-- PASO A PASO (tres selects fijos) -->
+      <label class="muted">Paso a Paso de la Actividad</label>
+      <div class="row">
+        <label>
+          <span>Seleccione el paso</span>
+          <select name="paso[]">{PASO_OPCIONES}</select>
+        </label>
+        <label>
+          <span>Seleccione el paso</span>
+          <select name="paso[]">{PASO_OPCIONES}</select>
+        </label>
+        <label>
+          <span>Seleccione el paso</span>
+          <select name="paso[]">{PASO_OPCIONES}</select>
+        </label>
+      </div>
+      <label style="margin-top:.5em"><span>Otra Actividad (opcional)</span>
+        <input type="text" name="paso_otro[]" placeholder="Describa otra actividad" />
+      </label>
+
+      <!-- RIESGOS (tres riesgos + tres niveles) -->
+      <label class="muted" style="margin-top:1em">Riesgo Potencial en Seguridad y Ambiente</label>
+      <div class="row">
+        <label><span>Riesgo</span><select name="riesgo[]">{RIESGO_OPCIONES}</select></label>
+        <label><span>Riesgo</span><select name="riesgo[]">{RIESGO_OPCIONES}</select></label>
+        <label><span>Riesgo</span><select name="riesgo[]">{RIESGO_OPCIONES}</select></label>
+      </div>
+      <div class="row">
+        <label><span>Nivel</span><select name="riesgo_nivel[]"><option value="">NA</option><option value="A">A</option><option value="M">M</option></select></label>
+        <label><span>Nivel</span><select name="riesgo_nivel[]"><option value="">NA</option><option value="A">A</option><option value="M">M</option></select></label>
+        <label><span>Nivel</span><select name="riesgo_nivel[]"><option value="">NA</option><option value="A">A</option><option value="M">M</option></select></label>
+      </div>
+      <label style="margin-top:.5em">Otro Riesgo (opcional): <input type="text" name="riesgo_otro[]" placeholder="Describa otro riesgo" /></label>
+
+      <!-- BARRERAS DE SEGURIDAD (tres selects) -->
+      <label class="muted" style="margin-top:1em">Barreras de Seguridad</label>
+      <div class="row">
+        <label><span>Seleccione</span><select name="barrera_seguridad[]">{SEGURIDAD_OPCIONES}</select></label>
+        <label><span>Seleccione</span><select name="barrera_seguridad[]">{SEGURIDAD_OPCIONES}</select></label>
+        <label><span>Seleccione</span><select name="barrera_seguridad[]">{SEGURIDAD_OPCIONES}</select></label>
+      </div>
+      <label style="margin-top:.5em">Otra (opcional): <input type="text" name="barrera_seguridad_otro[]" placeholder="Describa otra barrera" /></label>
+
+      <!-- BARRERAS DE SOPORTE (tres selects) -->
+      <label class="muted" style="margin-top:1em">Barreras de Soporte</label>
+      <div class="row">
+        <label><span>Seleccione</span><select name="barrera_soporte[]">{SOPORTE_OPCIONES}</select></label>
+        <label><span>Seleccione</span><select name="barrera_soporte[]">{SOPORTE_OPCIONES}</select></label>
+        <label><span>Seleccione</span><select name="barrera_soporte[]">{SOPORTE_OPCIONES}</select></label>
+      </div>
+      <label style="margin-top:.5em">Otra (opcional): <input type="text" name="barrera_soporte_otro[]" placeholder="Describa otra barrera" /></label>
+
+      <div class="actions" style="margin-top:8px"><button type="button" class="secondary" data-action="remove">Quitar bloque</button></div>
+    </div>
+  </template>
+
+  <script>
+    // --- Repeater logic (genérico para TODOS los grupos) ---
+    (function () {
+      function getTemplateId(group){ return 'tpl-' + group; }
+
+      function addItem(repeater) {
+        const group = repeater.dataset.group;
+        const tpl = document.getElementById(getTemplateId(group));
+        if (!tpl) return alert('No se encontró plantilla para ' + group);
+        const node = tpl.content.firstElementChild.cloneNode(true);
+        // Limpia valores
+        node.querySelectorAll('input, select, textarea').forEach(el => {
+          if (el.type === 'checkbox' || el.type === 'radio') el.checked = false; else el.value = '';
+        });
+        repeater.querySelector('.repeat-items').appendChild(node);
+      }
+
+      function removeItem(btn) {
+        const repeater = btn.closest('.repeater');
+        const min = parseInt(repeater.dataset.min || '1', 10);
+        const items = repeater.querySelectorAll('.repeat-item');
+        const item = btn.closest('.repeat-item');
+        if (items.length <= min) return alert('Debe haber al menos ' + min + ' elemento(s).');
+        item.remove();
+      }
+
+      // Delegación global para todos los repetidores
+      document.addEventListener('click', (ev) => {
+        const t = ev.target.closest('[data-action]');
+        if (!t) return;
+        const action = t.dataset.action;
+        const repeater = t.closest('.repeater');
+        if (!repeater) return;
+        if (action === 'add') addItem(repeater);
+        if (action === 'remove') removeItem(t);
+      });
+
+      // Inicializa: asegura mínimo
+      document.querySelectorAll('.repeater').forEach(repeater => {
+        const min = parseInt(repeater.dataset.min || '1', 10);
+        const items = repeater.querySelectorAll('.repeat-item').length;
+        for (let i = items; i < min; i++) addItem(repeater);
+      });
+    })();
+  </script>
 </body>
 </html>
