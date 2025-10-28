@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HSE-F8-0 – Permiso Integral de Trabajo Seguro en Altura y Eléctrico</title>
+  <style>
+    :root{
+      --ink:#111827; /* gray-900 */
+      --muted:#6b7280; /* gray-500 */
+      --line:#e5e7eb;  /* gray-200 */
+      --bg:#ffffff;    /* white */
+      --accent:#0ea5e9;/* sky-500 */
+      --ok:#059669;    /* emerald-600 */
+      --warn:#d97706;  /* amber-600 */
+      --bad:#dc2626;   /* red-600 */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial;
+      color:var(--ink); background:var(--bg);
+    }
+    .container{max-width:1100px;margin:24px auto;padding:24px;border:1px solid var(--line);border-radius:14px}
+    header{display:grid;gap:8px;margin-bottom:14px}
+    h1{margin:.2rem 0;font-size:1.35rem}
+    .subtitle{color:var(--muted);font-size:.95rem}
+    .grid{display:grid;gap:12px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media (max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+    fieldset{border:1px solid var(--line);border-radius:12px;padding:14px}
+    legend{font-weight:600;padding:0 8px}
+    label{display:block;font-size:.9rem;margin-bottom:6px}
+    input[type="text"],input[type="date"],input[type="time"],input[type="number"],select,textarea{
+      width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff
+    }
+    textarea{min-height:96px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 2.5fr;gap:10px;align-items:center}
+    .badge{display:inline-flex;gap:6px;align-items:center;background:#f1f5f9;border:1px solid var(--line);padding:2px 8px;border-radius:999px;font-size:.8rem}
+    .checkboxes{display:flex;gap:18px;align-items:center}
+    .muted{color:var(--muted)}
+    .note{font-size:.9rem;color:var(--muted);margin-top:6px}
+    .table{width:100%;border-collapse:collapse}
+    .table th,.table td{border:1px solid var(--line);padding:8px;vertical-align:top}
+    .table th{background:#f9fafb;text-align:left}
+
+    .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+    button{padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#f8fafc;cursor:pointer;font:inherit}
+    button.primary{background:var(--accent);border-color:var(--accent);color:white}
+    button.secondary{background:#f3f4f6}
+
+    /* Print styles: A4 friendly, hide controls, show URL footer */
+    @page { size: A4; margin: 14mm; }
+    @media print{
+      body{background:#fff}
+      .actions{display:none}
+      .container{border:none;padding:0}
+      a[href]::after{content:" (" attr(href) ")";font-size:.8em;color:var(--muted)}
+    }
+  </style>
+</head>
+<body>
+  <form class="container" id="form-hse" aria-labelledby="title">
+    <header>
+      <div class="badge">Código: <strong>HSE-F8-0</strong></div>
+      <h1 id="title">Permiso Integral de Trabajo Seguro en Altura y Eléctrico</h1>
+      <div class="subtitle">Use este formulario para documentar y autorizar actividades en altura y/o con riesgo eléctrico. Para el diligenciamiento de los ítems con evaluación, seleccione <strong>C</strong> (Conforme), <strong>NC</strong> (No Conforme) o <strong>NA</strong> (No Aplica).</div>
+    </header>
+
+    <!-- Encabezado / Datos del documento -->
+    <fieldset>
+      <legend>Datos del documento</legend>
+      <div class="grid grid-4">
+        <div>
+          <label for="fecha_aprobacion">Fecha aprobación</label>
+          <input type="date" id="fecha_aprobacion" name="fecha_aprobacion" />
+        </div>
+        <div>
+          <label for="fecha_actualizacion">Fecha de actualización</label>
+          <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" />
+        </div>
+        <div>
+          <label for="proceso_cc">Proceso C.C.</label>
+          <input type="text" id="proceso_cc" name="proceso_cc" />
+        </div>
+        <div>
+          <label for="zona_cc">Zona C.C.</label>
+          <input type="text" id="zona_cc" name="zona_cc" />
+        </div>
+      </div>
+      <div class="grid grid-3" style="margin-top:12px">
+        <div>
+          <label for="fecha">Fecha</label>
+          <input type="date" id="fecha" name="fecha" />
+        </div>
+        <div>
+          <label for="numero_acta">N° Acta / Matrícula</label>
+          <input type="text" id="numero_acta" name="numero_acta" />
+        </div>
+        <div class="row">
+          <label>Tipo de riesgo</label>
+          <div class="checkboxes" role="group" aria-label="Tipo de riesgo">
+            <label class="badge"><input type="checkbox" name="riesgo_altura" /> Altura</label>
+            <label class="badge"><input type="checkbox" name="riesgo_electrico" /> Eléctrico</label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Identificación del trabajo -->
+    <fieldset>
+      <legend>Identificación del trabajo</legend>
+      <div class="grid grid-2">
+        <div>
+          <label for="nombre_realiza">Nombre de quien realiza el trabajo</label>
+          <input type="text" id="nombre_realiza" name="nombre_realiza" required />
+        </div>
+        <div>
+          <label for="nombre_autoriza">Nombre de quien autoriza el trabajo</label>
+          <input type="text" id="nombre_autoriza" name="nombre_autoriza" required />
+        </div>
+      </div>
+      <div class="grid grid-3" style="margin-top:12px">
+        <div>
+          <label for="altura_aprox">Altura aproximada (m)</label>
+          <input type="number" step="0.1" min="0" id="altura_aprox" name="altura_aprox" />
+        </div>
+        <div>
+          <label for="actividad">Actividad</label>
+          <input type="text" id="actividad" name="actividad" />
+        </div>
+        <div>
+          <label for="tipo_servicio">Tipo de servicio</label>
+          <input type="text" id="tipo_servicio" name="tipo_servicio" />
+        </div>
+      </div>
+      <div class="grid grid-3" style="margin-top:12px">
+        <div>
+          <label for="inicio">Inicio</label>
+          <input type="time" id="inicio" name="inicio" />
+        </div>
+        <div>
+          <label for="final">Final</label>
+          <input type="time" id="final" name="final" />
+        </div>
+        <div>
+          <label for="duracion">Duración de la actividad (hh:mm)</label>
+          <input type="text" id="duracion" name="duracion" placeholder="00:00" pattern="^\n?(?:[01]?\d|2[0-3]):[0-5]\d$" />
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Función utilitaria para combos C/NC/NA (insertada por JS) -->
+    <template id="tpl-evaluacion">
+      <select aria-label="Evaluación" class="eva">
+        <option value="">—</option>
+        <option value="C">C</option>
+        <option value="NC">NC</option>
+        <option value="NA">NA</option>
+      </select>
+    </template>
+
+    <!-- Condiciones de seguridad del lugar de trabajo -->
+    <fieldset>
+      <legend>Condiciones de seguridad del lugar de trabajo</legend>
+      <p class="note">Seleccione C / NC / NA según corresponda.</p>
+      <table class="table" aria-describedby="nota-cond">
+        <thead>
+          <tr>
+            <th style="width:48%">Ítem</th>
+            <th style="width:12%">C/NC/NA</th>
+            <th>Detalle / Comentarios</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-seguridad"></tbody>
+      </table>
+    </fieldset>
+
+    <!-- Elementos de protección personal y herramientas -->
+    <fieldset>
+      <legend>Elementos de protección personal y herramientas – en buen estado</legend>
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:48%">Ítem</th>
+            <th style="width:12%">C/NC/NA</th>
+            <th>Detalle / Comentarios</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-epp"></tbody>
+      </table>
+    </fieldset>
+
+    <!-- Riesgos adicionales / Observaciones -->
+    <fieldset>
+      <legend>Riesgos adicionales y observaciones</legend>
+      <div class="grid grid-2">
+        <div>
+          <label for="riesgos_adicionales">Riesgos adicionales</label>
+          <textarea id="riesgos_adicionales" name="riesgos_adicionales"></textarea>
+        </div>
+        <div>
+          <label for="observaciones">Observaciones</label>
+          <textarea id="observaciones" name="observaciones"></textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Firmas -->
+    <fieldset>
+      <legend>Firmas</legend>
+      <div class="grid grid-2">
+        <div>
+          <label for="firma_realiza">Firma – Persona que realiza la actividad</label>
+          <input type="text" id="firma_realiza" name="firma_realiza" placeholder="Nombre legible / firma" />
+        </div>
+        <div>
+          <label for="firma_autoriza">Firma – Persona que autoriza</label>
+          <input type="text" id="firma_autoriza" name="firma_autoriza" placeholder="Nombre legible / firma" />
+        </div>
+      </div>
+    </fieldset>
+
+    <p class="note">Nota: Para el diligenciamiento de este espacio use <strong>C</strong> (Conforme), <strong>NC</strong> (No Conforme) o <strong>NA</strong> (No Aplica).</p>
+
+    <div class="actions">
+      <button type="reset" class="secondary" title="Limpiar todos los campos">Limpiar</button>
+      <button type="button" id="btn-export" class="secondary" title="Exportar a JSON">Exportar JSON</button>
+      <button type="button" class="primary" onclick="window.print()" title="Abrir diálogo de impresión">Imprimir</button>
+      <button type="submit" class="primary" title="Enviar (por defecto evita recarga)">Guardar</button>
+    </div>
+  </form>
+
+  <script>
+    // Ítems de "Condiciones de seguridad del lugar de trabajo"
+    const seguridadItems = [
+      'Afiliación al sistema de seguridad social',
+      'Certificación Trabajo en Alturas',
+      'Estado del clima',
+      'Condiciones óptimas de salud',
+      'No consumir bebida alcohólica / sustancias psicoactivas o drogas',
+      'Señalización / demarcación',
+      'Verificar voltajes con la pinza',
+      'Verificar que no exista contacto entre cables pelados',
+      'No porta elementos metálicos',
+      'Herramientas completas, aisladas y en buen estado',
+      'Escalera en buen estado, correctamente posicionada y asegurada',
+      'Nivelador en buen estado'
+    ];
+
+    // Ítems de "EPP y herramientas – en buen estado"
+    const eppItems = [
+      'Pantalón, botas dieléctricas y camisa de algodón',
+      'Casco dieléctrico con barbuquejo',
+      'Juego de guantes dieléctricos (guantín, látex, carnaza)',
+      'Gafas de seguridad / Careta',
+      'Línea de vida correctamente instalada',
+      'Pretales / Manilas / Cuerda estática',
+      'Verificar punto de anclaje y Tie-Off o anclaje portátil',
+      'Arnés / Eslinga de posicionamiento en buen estado y correctamente utilizados',
+      'Mosquetones / Frenos en buen estado – correctamente utilizados'
+    ];
+
+    function buildRow(text, group, index){
+      const tr = document.createElement('tr');
+      const tdLabel = document.createElement('td');
+      tdLabel.textContent = text;
+      const tdEval = document.createElement('td');
+      const sel = (document.getElementById('tpl-evaluacion').content.cloneNode(true)).querySelector('select');
+      sel.name = `${group}[${index}][eva]`;
+      sel.id = `${group}_${index}_eva`;
+      const tdObs = document.createElement('td');
+      const obs = document.createElement('input');
+      obs.type = 'text'; obs.name = `${group}[${index}][obs]`; obs.placeholder = 'Detalle / comentario opcional';
+      obs.ariaLabel = `Detalle para ${text}`;
+      tdEval.appendChild(sel);
+      tdObs.appendChild(obs);
+      tr.append(tdLabel, tdEval, tdObs);
+      return tr;
+    }
+
+    function mountTable(items, tbodyId, group){
+      const tbody = document.getElementById(tbodyId);
+      items.forEach((text, i)=> tbody.appendChild(buildRow(text, group, i)));
+    }
+
+    mountTable(seguridadItems, 'tabla-seguridad', 'seguridad');
+    mountTable(eppItems, 'tabla-epp', 'epp');
+
+    // UX: calcular duración si hay inicio y final
+    const tInicio = document.getElementById('inicio');
+    const tFinal = document.getElementById('final');
+    const tDur = document.getElementById('duracion');
+    function calcDur(){
+      if(!tInicio.value || !tFinal.value) return;
+      const [h1,m1] = tInicio.value.split(':').map(Number);
+      const [h2,m2] = tFinal.value.split(':').map(Number);
+      let start = h1*60+m1, end = h2*60+m2; if(end < start) end += 24*60; // cruza medianoche
+      const mins = end - start; const h = String(Math.floor(mins/60)).padStart(2,'0'); const m = String(mins%60).padStart(2,'0');
+      tDur.value = `${h}:${m}`;
+    }
+    tInicio.addEventListener('change', calcDur);
+    tFinal.addEventListener('change', calcDur);
+
+    // Envío controlado (no recarga) + export JSON
+    document.getElementById('form-hse').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      alert('Formulario validado y guardado localmente. (Integre su backend para persistencia).');
+    });
+
+    document.getElementById('btn-export').addEventListener('click',()=>{
+      const form = document.getElementById('form-hse');
+      const data = Object.fromEntries(new FormData(form).entries());
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = Object.assign(document.createElement('a'), {href:url, download:'permiso-hse-f8-0.json'});
+      a.click(); URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
